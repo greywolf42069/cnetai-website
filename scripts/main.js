@@ -78,6 +78,169 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
 
+    // Wallet connection functionality
+    const connectWalletBtn = document.getElementById('connectWalletBtn');
+    const disconnectWalletBtn = document.getElementById('disconnectWalletBtn');
+    const walletAddress = document.getElementById('walletAddress');
+    const tokenBalance = document.getElementById('tokenBalance');
+    
+    if (connectWalletBtn) {
+        connectWalletBtn.addEventListener('click', function() {
+            // Simulate wallet connection
+            walletAddress.textContent = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
+            tokenBalance.textContent = '1,250.50 $CNETAI';
+            connectWalletBtn.textContent = 'Connected';
+            connectWalletBtn.disabled = true;
+        });
+    }
+    
+    if (disconnectWalletBtn) {
+        disconnectWalletBtn.addEventListener('click', function() {
+            walletAddress.textContent = 'Not connected';
+            tokenBalance.textContent = '0';
+            connectWalletBtn.textContent = 'Connect Wallet';
+            connectWalletBtn.disabled = false;
+        });
+    }
+
+    // Chat functionality
+    const chatMessages = document.getElementById('chatMessages');
+    const messageInput = document.getElementById('messageInput');
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+    
+    if (sendMessageBtn && messageInput) {
+        sendMessageBtn.addEventListener('click', function() {
+            const message = messageInput.value.trim();
+            if (message) {
+                addMessage('User', message, true);
+                messageInput.value = '';
+                
+                // Simulate response
+                setTimeout(() => {
+                    const responses = [
+                        "Welcome to CNetAI!",
+                        "Thanks for your message!",
+                        "The future of blockchain is here!",
+                        "Stay secure with our quantum-resistant tech!",
+                        "Have you checked out our privacy features?"
+                    ];
+                    const response = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage('CNetAI Bot', response, false);
+                }, 1000);
+            }
+        });
+        
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessageBtn.click();
+            }
+        });
+    }
+    
+    function addMessage(username, content, isUser) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user-message' : ''}`;
+        
+        const now = new Date();
+        const timestamp = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+        
+        messageDiv.innerHTML = `
+            <div class="message-header">
+                <span class="username">${username}</span>
+                <span class="timestamp">${timestamp}</span>
+            </div>
+            <div class="message-content">${content}</div>
+        `;
+        
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Swap functionality
+    const fromAmount = document.getElementById('fromAmount');
+    const toAmount = document.getElementById('toAmount');
+    const fromToken = document.getElementById('fromToken');
+    const toToken = document.getElementById('toToken');
+    const swapBtn = document.getElementById('swapBtn');
+    
+    if (fromAmount && toAmount) {
+        // Simple rate conversion (for demo purposes)
+        function updateSwapRate() {
+            const amount = parseFloat(fromAmount.value) || 0;
+            let rate = 0.0001; // 1 $CNETAI = 0.0001 ETH
+            
+            if (fromToken.value === 'cnetai' && toToken.value === 'eth') {
+                rate = 0.0001;
+            } else if (fromToken.value === 'eth' && toToken.value === 'cnetai') {
+                rate = 10000; // 1 ETH = 10,000 $CNETAI
+            } else if (fromToken.value === 'usdt' && toToken.value === 'cnetai') {
+                rate = 10; // 1 USDT = 10 $CNETAI
+            } else if (fromToken.value === 'cnetai' && toToken.value === 'usdt') {
+                rate = 0.1; // 1 $CNETAI = 0.1 USDT
+            }
+            
+            toAmount.value = (amount * rate).toFixed(6);
+        }
+        
+        fromAmount.addEventListener('input', updateSwapRate);
+        fromToken.addEventListener('change', updateSwapRate);
+        toToken.addEventListener('change', updateSwapRate);
+        
+        if (swapBtn) {
+            swapBtn.addEventListener('click', function() {
+                if (fromAmount.value && parseFloat(fromAmount.value) > 0) {
+                    alert(`Swap initiated: ${fromAmount.value} ${fromToken.value.toUpperCase()} for ${toAmount.value} ${toToken.value.toUpperCase()}`);
+                    // In a real implementation, this would connect to a DEX
+                } else {
+                    alert('Please enter a valid amount');
+                }
+            });
+        }
+    }
+
+    // Auction functionality
+    const bidBtn = document.getElementById('bidBtn');
+    const claimBtn = document.getElementById('claimBtn');
+    const bidAmount = document.getElementById('bidAmount');
+    const currentPrice = document.getElementById('currentPrice');
+    const timeRemaining = document.getElementById('timeRemaining');
+    
+    if (bidBtn) {
+        bidBtn.addEventListener('click', function() {
+            if (bidAmount.value && parseFloat(bidAmount.value) > 0) {
+                alert(`Bid placed: ${bidAmount.value} ETH`);
+                // In a real implementation, this would interact with the auction contract
+            } else {
+                alert('Please enter a valid bid amount');
+            }
+        });
+    }
+    
+    if (claimBtn) {
+        claimBtn.addEventListener('click', function() {
+            alert('Tokens claimed successfully!');
+            // In a real implementation, this would interact with the auction contract
+        });
+    }
+    
+    // Simulate auction timer
+    if (timeRemaining) {
+        setInterval(() => {
+            // This is just a simulation - in reality, this would come from the blockchain
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            
+            const diff = tomorrow - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            timeRemaining.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }, 1000);
+    }
+
     // Particle background effect
     createParticleBackground();
 

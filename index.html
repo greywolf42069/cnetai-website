@@ -26,12 +26,13 @@
                     <ul class="nav-list">
                         <li><a href="#features">Features</a></li>
                         <li><a href="#privacy">Privacy</a></li>
-                        <li><a href="#technology">Technology</a></li>
                         <li><a href="#tokenomics">Tokenomics</a></li>
-                        <li><a href="#roadmap">Roadmap</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#wallet">Wallet</a></li>
+                        <li><a href="#chat">Chat</a></li>
+                        <li><a href="#swap">Swap</a></li>
+                        <li><a href="#auction">Auction</a></li>
                     </ul>
-                    <button class="connect-wallet-btn">Connect Wallet</button>
+                    <button class="connect-wallet-btn" id="connectWallet">Connect Wallet</button>
                 </nav>
                 <div class="mobile-menu-toggle">
                     <span></span>
@@ -196,6 +197,145 @@
                         <div class="token-stat">
                             <span class="label">Block Time:</span>
                             <span class="value">~2 seconds</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wallet Section -->
+        <section id="wallet" class="wallet">
+            <div class="container">
+                <h2 class="section-title">Wallet Integration</h2>
+                <div class="wallet-content">
+                    <div class="wallet-info">
+                        <div class="wallet-address">
+                            <span>Wallet Address:</span>
+                            <span id="walletAddress">Not connected</span>
+                        </div>
+                        <div class="wallet-balance">
+                            <span>$CNETAI Balance:</span>
+                            <span id="tokenBalance">0</span>
+                        </div>
+                        <div class="wallet-actions">
+                            <button class="btn primary-btn" id="connectWalletBtn">Connect Wallet</button>
+                            <button class="btn secondary-btn" id="disconnectWalletBtn">Disconnect</button>
+                        </div>
+                    </div>
+                    <div class="wallet-graphic">
+                        <div class="blockchain-connection">
+                            <div class="node wallet-node">Wallet</div>
+                            <div class="node blockchain-node">Blockchain</div>
+                            <div class="connection-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chat Section -->
+        <section id="chat" class="chat">
+            <div class="container">
+                <h2 class="section-title">Community Chat</h2>
+                <div class="chat-content">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message system-message">Welcome to CNetAI Community Chat!</div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="Type your message here...">
+                        <button class="btn primary-btn" id="sendMessageBtn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Swap Section -->
+        <section id="swap" class="swap">
+            <div class="container">
+                <h2 class="section-title">Token Swap</h2>
+                <div class="swap-content">
+                    <div class="swap-form">
+                        <div class="swap-input">
+                            <label>From</label>
+                            <div class="token-input">
+                                <input type="number" id="fromAmount" placeholder="0.0">
+                                <select id="fromToken">
+                                    <option value="eth">ETH</option>
+                                    <option value="usdt">USDT</option>
+                                    <option value="cnetai" selected>$CNETAI</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="swap-arrow">
+                            <div class="arrow-icon">↓</div>
+                        </div>
+                        <div class="swap-input">
+                            <label>To</label>
+                            <div class="token-input">
+                                <input type="number" id="toAmount" placeholder="0.0" readonly>
+                                <select id="toToken">
+                                    <option value="eth" selected>ETH</option>
+                                    <option value="usdt">USDT</option>
+                                    <option value="cnetai">$CNETAI</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="swap-rate">
+                            <span>Rate: 1 $CNETAI = 0.0001 ETH</span>
+                        </div>
+                        <button class="btn primary-btn" id="swapBtn">Swap Tokens</button>
+                    </div>
+                    <div class="swap-graphic">
+                        <div class="token-flow">
+                            <div class="token from-token">$CNETAI</div>
+                            <div class="swap-arrow-graphic">⇄</div>
+                            <div class="token to-token">ETH</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Auction Section -->
+        <section id="auction" class="auction">
+            <div class="container">
+                <h2 class="section-title">Reverse Dutch Auction</h2>
+                <div class="auction-content">
+                    <div class="auction-info">
+                        <div class="auction-details">
+                            <div class="detail-item">
+                                <span>Token:</span>
+                                <span>$CNETAI</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Total Amount:</span>
+                                <span>1,000,000 $CNETAI</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Current Price:</span>
+                                <span id="currentPrice">0.0001 ETH</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Time Remaining:</span>
+                                <span id="timeRemaining">24:00:00</span>
+                            </div>
+                        </div>
+                        <div class="auction-actions">
+                            <div class="bid-input">
+                                <input type="number" id="bidAmount" placeholder="ETH amount">
+                                <button class="btn primary-btn" id="bidBtn">Place Bid</button>
+                            </div>
+                            <button class="btn secondary-btn" id="claimBtn">Claim Tokens</button>
+                        </div>
+                    </div>
+                    <div class="auction-graphic">
+                        <div class="price-chart">
+                            <div class="chart-axis">
+                                <div class="price-point start-price">0.001 ETH</div>
+                                <div class="price-point current-price">0.0001 ETH</div>
+                                <div class="price-point end-price">0.00001 ETH</div>
+                            </div>
+                            <div class="price-line"></div>
                         </div>
                     </div>
                 </div>
