@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://cnetai.example.com/sitemap.xml
