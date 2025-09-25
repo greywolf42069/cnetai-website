@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#003366">
+    <title>CNetAI - Quantum-Resistant Blockchain Platform</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+</head>
+<body>
+    <div id="app">
+        <!-- Animated background grid -->
+        <div class="grid-background"></div>
+        
+        <!-- Header with navigation -->
+        <header class="header">
+            <div class="container">
+                <div class="logo">
+                    <img src="assets/images/logo.svg" alt="CNetAI Logo" class="logo-img">
+                    <h1>CNet<span class="ai-highlight">AI</span></h1>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                        <li><a href="#technology">Technology</a></li>
+                        <li><a href="#tokenomics">Tokenomics</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <button class="connect-wallet-btn">Connect Wallet</button>
+                </nav>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-title glitch-text" data-text="SECURE. PRIVATE. INTELLIGENT.">SECURE. PRIVATE. INTELLIGENT.</h2>
+                    <p class="hero-subtitle">Next-generation blockchain platform with post-quantum security and AI-powered intelligence</p>
+                    <div class="hero-buttons">
+                        <button class="btn primary-btn">Buy $CNETAI</button>
+                        <button class="btn secondary-btn">Whitepaper</button>
+                    </div>
+                    <div class="token-price">
+                        <span>$CNETAI Price:</span>
+                        <span class="price">$0.2456</span>
+                        <span class="change positive">+5.2%</span>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="network-visualization">
+                        <div class="node central-node"></div>
+                        <div class="node satellite-node" style="--delay: 0.2s;"></div>
+                        <div class="node satellite-node" style="--delay: 0.4s;"></div>
+                        <div class="node satellite-node" style="--delay: 0.6s;"></div>
+                        <div class="node satellite-node" style="--delay: 0.8s;"></div>
+                        <div class="connection-line"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Core Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <div class="shield-icon"></div>
+                        </div>
+                        <h3>Post-Quantum Security</h3>
+                        <p>NIST-standardized ML-KEM & ML-DSA cryptography protects against quantum computing threats.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <div class="privacy-icon"></div>
+                        </div>
+                        <h3>Advanced Privacy</h3>
+                        <p>Ring signatures, stealth addresses, and confidential transactions for complete anonymity.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <div class="ai-icon"></div>
+                        </div>
+                        <h3>AI-Powered Oracle</h3>
+                        <p>Machine learning validates network submissions and detects malicious activities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <div class="vr-icon"></div>
+                        </div>
+                        <h3>VR Integration</h3>
+                        <p>Immersive 3D network visualization and virtual environments for user interaction.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Section -->
+        <section id="privacy" class="privacy">
+            <div class="container">
+                <h2 class="section-title">Advanced Privacy Protection</h2>
+                <div class="privacy-content">
+                    <p class="section-description">CNetAI implements multiple layers of privacy protection to ensure complete anonymity and confidentiality of transactions.</p>
+                    
+                    <div class="privacy-features">
+                        <div class="privacy-feature">
+                            <h3>Bulletproof Encryption System</h3>
+                            <div class="graphic-container">
+                                <div class="bulletproof-graphic">
+                                    <div class="encryption-layer layer-1">
+                                        <span>Transaction Data</span>
+                                    </div>
+                                    <div class="encryption-layer layer-2">
+                                        <span>Range Proof Generation</span>
+                                    </div>
+                                    <div class="encryption-layer layer-3">
+                                        <span>Zero-Knowledge Verification</span>
+                                    </div>
+                                    <div class="encryption-layer layer-4">
+                                        <span>Encrypted Output</span>
+                                    </div>
+                                    <div class="encryption-connection"></div>
+                                </div>
+                            </div>
+                            <p>Bulletproofs are short non-interactive zero-knowledge proofs that require no trusted setup. Our implementation obscures transaction amounts while ensuring validity without revealing sensitive data.</p>
+                        </div>
+                        
+                        <div class="privacy-feature">
+                            <h3>Ring Confidential Transactions (RingCT)</h3>
+                            <div class="graphic-container">
+                                <div class="ringct-graphic">
+                                    <div class="central-transaction">
+                                        <span>Actual Transaction</span>
+                                    </div>
+                                    <div class="decoy-transactions">
+                                        <div class="decoy" style="--pos: 1;"><span>Decoy #1</span></div>
+                                        <div class="decoy" style="--pos: 2;"><span>Decoy #2</span></div>
+                                        <div class="decoy" style="--pos: 3;"><span>Decoy #3</span></div>
+                                        <div class="decoy" style="--pos: 4;"><span>Decoy #4</span></div>
+                                    </div>
+                                    <div class="ring-signature">
+                                        <span>Ring Signature</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>RingCT mixes the sender's transaction with decoy participants, making it impossible to determine which party actually initiated the transaction. Dynamic ring sizes scale with network size for enhanced privacy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tokenomics Section -->
+        <section id="tokenomics" class="tokenomics">
+            <div class="container">
+                <h2 class="section-title">Tokenomics</h2>
+                <div class="tokenomics-content">
+                    <div class="token-distribution">
+                        <div class="distribution-chart">
+                            <div class="chart-segment" style="--percentage: 40; --color: #00aaff;">Ecosystem Development</div>
+                            <div class="chart-segment" style="--percentage: 25; --color: #ff6600;">Community Rewards</div>
+                            <div class="chart-segment" style="--percentage: 20; --color: #00cc66;">Team & Advisors</div>
+                            <div class="chart-segment" style="--percentage: 10; --color: #ffcc00;">Marketing</div>
+                            <div class="chart-segment" style="--percentage: 5; --color: #cc00ff;">Liquidity</div>
+                        </div>
+                    </div>
+                    <div class="token-details">
+                        <div class="token-stat">
+                            <span class="label">Token Name:</span>
+                            <span class="value">CNetAI</span>
+                        </div>
+                        <div class="token-stat">
+                            <span class="label">Ticker:</span>
+                            <span class="value">$CNETAI</span>
+                        </div>
+                        <div class="token-stat">
+                            <span class="label">Total Supply:</span>
+                            <span class="value">1,000,000,000</span>
+                        </div>
+                        <div class="token-stat">
+                            <span class="label">Consensus:</span>
+                            <span class="value">Hybrid PoS/Microblocks</span>
+                        </div>
+                        <div class="token-stat">
+                            <span class="label">Block Time:</span>
+                            <span class="value">~2 seconds</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo.svg" alt="CNetAI Logo" class="logo-img">
+                        <h3>CNet<span class="ai-highlight">AI</span></h3>
+                    </div>
+                    <div class="footer-links">
+                        <div class="link-column">
+                            <h4>Resources</h4>
+                            <ul>
+                                <li><a href="#">Whitepaper</a></li>
+                                <li><a href="#">Documentation</a></li>
+                                <li><a href="#">GitHub</a></li>
+                            </ul>
+                        </div>
+                        <div class="link-column">
+                            <h4>Community</h4>
+                            <ul>
+                                <li><a href="#">Discord</a></li>
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="#">Telegram</a></li>
+                            </ul>
+                        </div>
+                        <div class="link-column">
+                            <h4>Legal</h4>
+                            <ul>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms of Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 CNetAI. All rights reserved. $CNETAI</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/main.js"></script>
+</body>
+</html>
