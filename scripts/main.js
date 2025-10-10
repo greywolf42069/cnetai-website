@@ -109,12 +109,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Wallet module loaded successfully');
     }).catch(error => {
         console.error('Failed to load wallet module:', error);
-        // Show an error message to the user
-        if (connectWalletBtn) {
-            connectWalletBtn.addEventListener('click', function() {
-                alert('Wallet functionality is currently unavailable. Please try again later.');
-            });
-        }
+        // Set wallet to null to indicate failure
+        window.wallet = null;
     });
     
     // Check if wallet exists on page load
