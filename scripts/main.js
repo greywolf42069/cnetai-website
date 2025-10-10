@@ -99,23 +99,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const disconnectWalletBtn = document.getElementById('disconnectWalletBtn');
     const walletAddress = document.getElementById('walletAddress');
     const tokenBalance = document.getElementById('tokenBalance');
+    const walletModal = document.getElementById('walletModal');
+    const walletSetupContainer = document.getElementById('walletSetupContainer');
+    const closeModal = document.querySelector('.close');
+    
+    // Check if wallet exists on page load
+    window.addEventListener('load', function() {
+        if (hasWallet()) {
+            // If wallet exists, update UI to show connected state
+            const walletData = getWalletData();
+            if (walletData && walletData.address) {
+                updateWalletUI(walletData.address, '1,250.50 ASC');
+            }
+        }
+    });
     
     if (connectWalletBtn) {
         connectWalletBtn.addEventListener('click', function() {
             // Add visual feedback
             this.style.animation = 'button-click 0.3s';
             
-            // Simulate wallet connection
-            setTimeout(() => {
-                walletAddress.textContent = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
-                tokenBalance.textContent = '1,250.50 ASC';
-                connectWalletBtn.textContent = 'Connected';
-                connectWalletBtn.disabled = true;
-                connectWalletBtn.style.background = 'linear-gradient(90deg, var(--accent-green), var(--accent-cyan))';
-                
-                // Add cyber glow effect
-                connectWalletBtn.style.boxShadow = '0 0 30px rgba(0, 255, 102, 0.8)';
-            }, 500);
+            // Check if wallet file exists
+            if (hasWallet()) {
+                // Prompt to unlock existing wallet
+                showUnlockWalletForm();
+            } else {
+                // Start wallet creation journey
+                showWalletSetupForm();
+            }
+            
+            // Show modal
+            walletModal.style.display = 'block';
         });
     }
     
@@ -124,15 +138,320 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add visual feedback
             this.style.animation = 'button-click 0.3s';
             
-            setTimeout(() => {
-                walletAddress.textContent = 'Not connected';
-                tokenBalance.textContent = '0';
-                connectWalletBtn.textContent = 'Connect Wallet';
-                connectWalletBtn.disabled = false;
-                connectWalletBtn.style.background = 'linear-gradient(90deg, var(--secondary-blue), var(--accent-cyan))';
-                connectWalletBtn.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.4)';
-            }, 500);
+            // Disconnect wallet
+            disconnectWallet();
         });
+    }
+    
+    // Close modal when clicking on X
+    if (closeModal) {
+        closeModal.addEventListener('click', function() {
+            walletModal.style.display = 'none';
+        });
+    }
+    
+    // Close modal when clicking outside of it
+    window.addEventListener('click', function(event) {
+        if (event.target === walletModal) {
+            walletModal.style.display = 'none';
+        }
+    });
+    
+    // Wallet utility functions
+    function hasWallet() {
+        // Check if wallet data exists in localStorage
+        return localStorage.getItem('cnetai_wallet') !== null;
+    }
+    
+    function getWalletData() {
+        try {
+            const walletData = localStorage.getItem('cnetai_wallet');
+            return walletData ? JSON.parse(walletData) : null;
+        } catch (e) {
+            console.error('Error parsing wallet data:', e);
+            return null;
+        }
+    }
+    
+    function saveWalletData(walletData) {
+        try {
+            localStorage.setItem('cnetai_wallet', JSON.stringify(walletData));
+            return true;
+        } catch (e) {
+            console.error('Error saving wallet data:', e);
+            return false;
+        }
+    }
+    
+    function updateWalletUI(address, balance) {
+        walletAddress.textContent = address;
+        tokenBalance.textContent = balance;
+        connectWalletBtn.textContent = 'Connected';
+        connectWalletBtn.disabled = true;
+        connectWalletBtn.style.background = 'linear-gradient(90deg, var(--accent-green), var(--accent-cyan))';
+        connectWalletBtn.style.boxShadow = '0 0 30px rgba(0, 255, 102, 0.8)';
+    }
+    
+    function disconnectWallet() {
+        walletAddress.textContent = 'Not connected';
+        tokenBalance.textContent = '0';
+        connectWalletBtn.textContent = 'Connect Wallet';
+        connectWalletBtn.disabled = false;
+        connectWalletBtn.style.background = 'linear-gradient(90deg, var(--secondary-blue), var(--accent-cyan))';
+        connectWalletBtn.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.4)';
+        
+        // Remove wallet data from localStorage
+        localStorage.removeItem('cnetai_wallet');
+    }
+    
+    function showUnlockWalletForm() {
+        walletSetupContainer.innerHTML = `
+            <h2>Unlock Your Wallet</h2>
+            <div class="wallet-setup-form">
+                <div class="form-group">
+                    <label for="unlockPassword">Password</label>
+                    <input type="password" id="unlockPassword" placeholder="Enter your wallet password">
+                </div>
+                <div class="actions">
+                    <button class="btn secondary-btn" id="cancelUnlockBtn">Cancel</button>
+                    <button class="btn primary-btn" id="unlockWalletBtn">Unlock</button>
+                </div>
+            </div>
+        `;
+        
+        // Add event listeners
+        document.getElementById('cancelUnlockBtn').addEventListener('click', function() {
+            walletModal.style.display = 'none';
+        });
+        
+        document.getElementById('unlockWalletBtn').addEventListener('click', function() {
+            const password = document.getElementById('unlockPassword').value;
+            
+            if (!password) {
+                alert('Please enter your password');
+                return;
+            }
+            
+            // In a real implementation, you would decrypt the wallet data here
+            // For now, we'll just simulate successful unlock
+            const walletData = getWalletData();
+            if (walletData) {
+                updateWalletUI(walletData.address, '1,250.50 ASC');
+                walletModal.style.display = 'none';
+                
+                // Redirect to dashboard (to be implemented)
+                // window.location.href = '/dashboard';
+            } else {
+                alert('Failed to unlock wallet');
+            }
+        });
+    }
+    
+    function showWalletSetupForm() {
+        walletSetupContainer.innerHTML = `
+            <h2>Create New Wallet</h2>
+            <div class="wallet-setup-step active" id="step1">
+                <div class="wallet-setup-form">
+                    <div class="form-group">
+                        <label for="accountName">Account Name</label>
+                        <input type="text" id="accountName" placeholder="Enter account name">
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="importSeedCheckbox">
+                        <label for="importSeedCheckbox">I have seed words to import</label>
+                    </div>
+                    <div class="actions">
+                        <button class="btn secondary-btn" id="cancelSetupBtn">Cancel</button>
+                        <button class="btn primary-btn" id="nextStepBtn">Next</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wallet-setup-step" id="step2">
+                <div class="wallet-setup-form">
+                    <div id="seedWordsSection">
+                        <div class="form-group">
+                            <label>Enter Your Seed Words</label>
+                            <textarea id="seedWords" placeholder="Enter your 12 or 24 seed words, separated by spaces"></textarea>
+                        </div>
+                    </div>
+                    <div id="generateKeysSection" style="display: none;">
+                        <div class="form-group">
+                            <label>Your New Seed Words</label>
+                            <div class="seed-words" id="generatedSeedWords">
+                                <!-- Seed words will be generated here -->
+                            </div>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="seedWordsSaved">
+                            <label for="seedWordsSaved">I have saved my seed words in a secure location</label>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn secondary-btn" id="backStepBtn">Back</button>
+                        <button class="btn primary-btn" id="nextStep2Btn">Next</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wallet-setup-step" id="step3">
+                <div class="wallet-setup-form">
+                    <div class="form-group">
+                        <label for="walletPassword">Password</label>
+                        <input type="password" id="walletPassword" placeholder="Set a strong password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                    </div>
+                    <div class="actions">
+                        <button class="btn secondary-btn" id="backStep2Btn">Back</button>
+                        <button class="btn primary-btn" id="createWalletBtn">Create Wallet</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add event listeners for step 1
+        document.getElementById('cancelSetupBtn').addEventListener('click', function() {
+            walletModal.style.display = 'none';
+        });
+        
+        document.getElementById('importSeedCheckbox').addEventListener('change', function() {
+            const importSeed = this.checked;
+            const seedWordsSection = document.getElementById('seedWordsSection');
+            const generateKeysSection = document.getElementById('generateKeysSection');
+            
+            if (importSeed) {
+                seedWordsSection.style.display = 'block';
+                generateKeysSection.style.display = 'none';
+            } else {
+                seedWordsSection.style.display = 'none';
+                generateKeysSection.style.display = 'block';
+                
+                // Generate seed words
+                generateSeedWords();
+            }
+        });
+        
+        document.getElementById('nextStepBtn').addEventListener('click', function() {
+            const accountName = document.getElementById('accountName').value;
+            if (!accountName) {
+                alert('Please enter an account name');
+                return;
+            }
+            
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+            
+            // If not importing seed words, generate them
+            const importSeed = document.getElementById('importSeedCheckbox').checked;
+            if (!importSeed) {
+                document.getElementById('generateKeysSection').style.display = 'block';
+                generateSeedWords();
+            }
+        });
+        
+        // Add event listeners for step 2
+        document.getElementById('backStepBtn').addEventListener('click', function() {
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step1').classList.add('active');
+        });
+        
+        document.getElementById('nextStep2Btn').addEventListener('click', function() {
+            const importSeed = document.getElementById('importSeedCheckbox').checked;
+            
+            if (importSeed) {
+                const seedWords = document.getElementById('seedWords').value.trim();
+                if (!seedWords) {
+                    alert('Please enter your seed words');
+                    return;
+                }
+            } else {
+                const seedWordsSaved = document.getElementById('seedWordsSaved').checked;
+                if (!seedWordsSaved) {
+                    alert('Please confirm that you have saved your seed words');
+                    return;
+                }
+            }
+            
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.add('active');
+        });
+        
+        // Add event listeners for step 3
+        document.getElementById('backStep2Btn').addEventListener('click', function() {
+            document.getElementById('step3').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+        });
+        
+        document.getElementById('createWalletBtn').addEventListener('click', function() {
+            const password = document.getElementById('walletPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!password || !confirmPassword) {
+                alert('Please enter and confirm your password');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long');
+                return;
+            }
+            
+            // Create wallet
+            createWallet(password);
+        });
+    }
+    
+    function generateSeedWords() {
+        // In a real implementation, you would generate actual seed words
+        // For now, we'll use placeholder words
+        const words = [
+            'circuit', 'digital', 'neon', 'pulse', 'quantum', 'matrix',
+            'cyber', 'grid', 'node', 'packet', 'signal', 'voltage'
+        ];
+        
+        const seedWordsContainer = document.getElementById('generatedSeedWords');
+        seedWordsContainer.innerHTML = '';
+        
+        words.forEach((word, index) => {
+            const wordElement = document.createElement('div');
+            wordElement.className = 'seed-word';
+            wordElement.textContent = `${index + 1}. ${word}`;
+            seedWordsContainer.appendChild(wordElement);
+        });
+    }
+    
+    function createWallet(password) {
+        // In a real implementation, you would generate actual key pairs
+        // For now, we'll create mock wallet data
+        const walletData = {
+            address: '0x' + Array.from({length: 40}, () => Math.floor(Math.random() * 16).toString(16)).join(''),
+            accountName: document.getElementById('accountName').value,
+            createdAt: new Date().toISOString(),
+            // In a real implementation, you would encrypt the private key with the password
+            encryptedPrivateKey: 'encrypted_private_key_placeholder'
+        };
+        
+        // Save wallet data
+        if (saveWalletData(walletData)) {
+            updateWalletUI(walletData.address, '1,250.50 ASC');
+            walletModal.style.display = 'none';
+            
+            // Show success message
+            alert('Wallet created successfully!');
+            
+            // Redirect to dashboard (to be implemented)
+            // window.location.href = '/dashboard';
+        } else {
+            alert('Failed to create wallet');
+        }
     }
 
     // Chat functionality
