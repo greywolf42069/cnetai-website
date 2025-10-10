@@ -8,7 +8,7 @@ class CNetAIWallet {
     async init() {
         try {
             // Load the WASM module
-            const wasmModule = await import('../cnetai-wasm-signer/pkg/cnetai_wasm_signer.js');
+            const wasmModule = await import('./cnetai_wasm_signer.js');
             await wasmModule.default();
             this.wasm = wasmModule;
             this.isWasmLoaded = true;
