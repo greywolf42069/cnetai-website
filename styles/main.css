@@ -2849,6 +2849,28 @@ h1, h2, h3, h4, h5, h6 {
   .wallet-content {
     flex-direction: column;
   }
+  
+  /* Mobile optimization for wallet modal */
+  .modal-content {
+    width: 95%;
+    max-width: none;
+    margin: 10% auto;
+    padding: 20px;
+  }
+  
+  .wallet-setup-form .seed-words {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .wallet-setup-form .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .wallet-setup-form .actions .btn {
+    margin: 0;
+    width: 100%;
+  }
 }
 
 @media (max-width: 576px) {
@@ -2877,6 +2899,27 @@ h1, h2, h3, h4, h5, h6 {
   .bid-input {
     flex-direction: column;
   }
+  
+  /* Further mobile optimization for wallet modal */
+  .modal-content {
+    width: 98%;
+    padding: 15px;
+    margin: 5% auto;
+  }
+  
+  .wallet-setup-form .seed-words {
+    grid-template-columns: 1fr;
+  }
+  
+  .wallet-setup-form .form-group {
+    gap: 5px;
+  }
+  
+  .wallet-setup-form input,
+  .wallet-setup-form textarea {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
 }
 
 /* Wallet Modal */
@@ -2903,12 +2946,16 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 500px;
   box-shadow: 0 0 30px rgba(0, 204, 255, 0.3);
   position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(0);
   animation: slideIn 0.3s ease-out;
 }
 
 @keyframes slideIn {
   from {
-    transform: translateY(-50px);
+    transform: translateY(-20px);
     opacity: 0;
   }
   to {
