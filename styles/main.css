@@ -2349,6 +2349,174 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px dashed rgba(0, 102, 204, 0.3);
 }
 
+/* Dashboard Styles */
+.dashboard {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
+    min-height: calc(100vh - 160px);
+}
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.wallet-info-card,
+.activity-card,
+.mining-card {
+    background: rgba(10, 20, 40, 0.7);
+    border: 1px solid var(--accent-cyan);
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+    transition: var(--transition-normal);
+}
+
+.wallet-info-card:hover,
+.activity-card:hover,
+.mining-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 204, 255, 0.4);
+}
+
+.wallet-info-card h2,
+.activity-card h2,
+.mining-card h2 {
+    color: var(--accent-cyan);
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.wallet-details {
+    margin-bottom: 25px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 204, 255, 0.1);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-item .label {
+    color: var(--gray-text);
+    font-family: 'Exo 2', sans-serif;
+}
+
+.detail-item .value {
+    color: var(--light-text);
+    font-family: 'Orbitron', sans-serif;
+    word-break: break-all;
+    text-align: right;
+    max-width: 60%;
+}
+
+.wallet-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.wallet-actions .btn {
+    flex: 1;
+}
+
+.activity-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 204, 255, 0.1);
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+
+.activity-details {
+    flex: 1;
+}
+
+.activity-title {
+    color: var(--light-text);
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.activity-time {
+    color: var(--gray-text);
+    font-size: 0.9rem;
+}
+
+.mining-status {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-red);
+    margin-right: 10px;
+}
+
+.status-indicator.active {
+    background: var(--accent-green);
+    box-shadow: 0 0 10px var(--accent-green);
+}
+
+.mining-stats {
+    margin-bottom: 25px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.stat-item .label {
+    color: var(--gray-text);
+    font-family: 'Exo 2', sans-serif;
+}
+
+.stat-item .value {
+    color: var(--accent-cyan);
+    font-family: 'Orbitron', sans-serif;
+}
+
+@media (max-width: 768px) {
+    .dashboard-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .wallet-actions {
+        flex-direction: column;
+    }
+    
+    .detail-item .value {
+        max-width: 50%;
+    }
+}
+
 /* Status indicators for roadmap items */
 .phase-details li::after {
   content: '🚧';

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNetAI Dashboard</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/logo.svg" alt="CNetAI Logo">
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html#vision">Vision</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#tokenomics">Tokenomics</a></li>
+                    <li><a href="index.html#roadmap">Roadmap</a></li>
+                    <li><a href="index.html#developers">Developers</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+                <button class="connect-wallet-btn" id="connectWallet">Connect Wallet</button>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard">
+        <div class="container">
+            <h1 class="section-title">Wallet Dashboard</h1>
+            
+            <div class="dashboard-content">
+                <div class="wallet-info-card">
+                    <h2>Wallet Information</h2>
+                    <div class="wallet-details">
+                        <div class="detail-item">
+                            <span class="label">Address:</span>
+                            <span class="value" id="walletAddress">Not connected</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Balance:</span>
+                            <span class="value" id="tokenBalance">0 ASC</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Battle Chips:</span>
+                            <span class="value" id="battleChips">0</span>
+                        </div>
+                    </div>
+                    <div class="wallet-actions">
+                        <button class="btn secondary-btn" id="disconnectWallet">Disconnect</button>
+                        <button class="btn primary-btn" id="sendTokens">Send Tokens</button>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-list" id="activityList">
+                        <div class="activity-item">
+                            <div class="activity-icon">🔒</div>
+                            <div class="activity-details">
+                                <div class="activity-title">Wallet Connected</div>
+                                <div class="activity-time">Just now</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mining-card">
+                    <h2>Threat Mining</h2>
+                    <div class="mining-status">
+                        <div class="status-indicator active"></div>
+                        <span>Active</span>
+                    </div>
+                    <div class="mining-stats">
+                        <div class="stat-item">
+                            <span class="label">Threats Found:</span>
+                            <span class="value">12</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">ASC Earned:</span>
+                            <span class="value">245.50</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">Battle Chips:</span>
+                            <span class="value">3</span>
+                        </div>
+                    </div>
+                    <button class="btn primary-btn" id="startMining">Start Mining</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/logo.svg" alt="CNetAI Logo">
+                    <p>SECURE. INTELLIGENT. DECENTRALIZED.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Product</h3>
+                        <ul>
+                            <li><a href="#">NetAI dApp</a></li>
+                            <li><a href="#">Whitepaper</a></li>
+                            <li><a href="#">Documentation</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Community</h3>
+                        <ul>
+                            <li><a href="#">Discord</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Telegram</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">GitHub</a></li>
+                            <li><a href="#">Explorer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CNetAI. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

@@ -302,14 +302,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
                 
-                const success = await window.wallet.importWallet(walletDataJson, password);
+                // Parse the wallet data and extract the WASM wallet data
+                const walletData = JSON.parse(walletDataJson);
+                const success = await window.wallet.importWallet(walletData.walletData, password);
                 if (success) {
                     const publicKey = window.wallet.getPublicKey();
                     updateWalletUI(publicKey, '1,250.50 ASC');
                     walletModal.style.display = 'none';
                     
-                    // Redirect to dashboard (to be implemented)
-                    // window.location.href = '/dashboard';
+                    // Redirect to dashboard
+                    window.location.href = '/dashboard';
                 } else {
                     alert('Failed to unlock wallet. Incorrect password.');
                 }
@@ -659,8 +661,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Show success message
                 alert('Wallet created successfully!');
                 
-                // Redirect to dashboard (to be implemented)
-                // window.location.href = '/dashboard';
+                // Redirect to dashboard
+                window.location.href = '/dashboard';
             } else {
                 alert('Failed to save wallet data');
             }
