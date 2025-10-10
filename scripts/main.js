@@ -106,8 +106,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Import the WASM wallet module
     import('./wallet.js').then(walletModule => {
         window.wallet = walletModule.default;
+        console.log('Wallet module loaded successfully');
     }).catch(error => {
         console.error('Failed to load wallet module:', error);
+        // Show an error message to the user
+        if (connectWalletBtn) {
+            connectWalletBtn.addEventListener('click', function() {
+                alert('Wallet functionality is currently unavailable. Please try again later.');
+            });
+        }
     });
     
     // Check if wallet exists on page load
@@ -123,8 +130,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (connectWalletBtn) {
         connectWalletBtn.addEventListener('click', async function() {
+            console.log('Connect wallet button clicked');
             // Add visual feedback
             this.style.animation = 'button-click 0.3s';
+            
+            // Check if wallet module is loaded
+            if (!window.wallet) {
+                console.error('Wallet module not loaded');
+                alert('Wallet functionality is not available yet. Please try again in a moment.');
+                return;
+            }
             
             // Check if wallet file exists
             if (hasWallet()) {
