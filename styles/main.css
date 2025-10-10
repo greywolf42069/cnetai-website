@@ -2768,7 +2768,7 @@ h1, h2, h3, h4, h5, h6 {
     background: rgba(10, 14, 23, 0.95);
     backdrop-filter: blur(10px);
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     z-index: 1000;
@@ -2783,8 +2783,43 @@ h1, h2, h3, h4, h5, h6 {
   
   .nav-list {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
+    width: 100%;
+    padding: 0 20px;
+  }
+  
+  .nav-list a {
+    width: 100%;
+    text-align: left;
+    padding: 15px 0;
+    font-size: 1.1rem;
+    transition: none;
+  }
+  
+  .nav-list a::before,
+  .nav-list a::after {
+    transition: none;
+  }
+  
+  .nav-list a:hover::before,
+  .nav-list a:hover::after {
+    opacity: 1;
+  }
+  
+  .nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-cyan);
+    transition: none;
+  }
+  
+  .nav-list a:hover::after {
+    width: 100%;
   }
   
   .mobile-menu-toggle {
