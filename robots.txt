@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cnetai.com/sitemap.xml
+Sitemap: https://greywolf42069.github.io/CNetAI-Webpage/sitemap.xml

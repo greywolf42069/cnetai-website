@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#003366">
     <title>CNetAI - Quantum-Resistant Blockchain Platform</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+    <link rel="manifest" href="/CNetAI-Webpage/manifest.json">
+    <link rel="stylesheet" href="/CNetAI-Webpage/styles/main.css">
+    <link rel="icon" href="/CNetAI-Webpage/assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/CNetAI-Webpage/assets/icons/icon-192x192.png">
 </head>
 <body>
     <div id="app">
@@ -19,7 +19,7 @@
         <header class="header">
             <div class="container">
                 <div class="logo">
-                    <img src="assets/images/logo.svg" alt="CNetAI Logo" class="logo-img">
+                    <img src="/CNetAI-Webpage/assets/images/logo.svg" alt="CNetAI Logo" class="logo-img">
                     <h1>CNet<span class="ai-highlight">AI</span></h1>
                 </div>
                 <nav class="nav">
@@ -670,7 +670,7 @@
             <div class="container">
                 <div class="footer-content">
                     <div class="footer-logo">
-                        <img src="assets/images/logo.svg" alt="CNetAI Logo" class="logo-img">
+                        <img src="/CNetAI-Webpage/assets/images/logo.svg" alt="CNetAI Logo" class="logo-img">
                         <h3>CNet<span class="ai-highlight">AI</span></h3>
                     </div>
                     <div class="footer-links">
@@ -707,6 +707,20 @@
     </div>
 
     <!-- Scripts -->
-    <script src="scripts/main.js"></script>
+    <script src="/CNetAI-Webpage/scripts/main.js"></script>
+    <script>
+        // Register service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/CNetAI-Webpage/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
