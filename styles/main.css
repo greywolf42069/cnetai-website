@@ -2762,7 +2762,7 @@ h1, h2, h3, h4, h5, h6 {
   .nav {
     display: none;
     position: fixed;
-    top: 80px;
+    top: 100px;
     left: 0;
     width: 100%;
     background: rgba(10, 14, 23, 0.95);
