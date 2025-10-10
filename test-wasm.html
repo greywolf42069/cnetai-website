@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>WASM Test</title>
+</head>
+<body>
+    <h1>WASM Test</h1>
+    <button id="testBtn">Test WASM</button>
+    <div id="output"></div>
+
+    <script type="module">
+        import init, { WasmWallet } from './cnetai_wasm_signer.js';
+
+        document.getElementById('testBtn').addEventListener('click', async () => {
+            try {
+                // Initialize the WASM module
+                await init();
+                
+                // Create a new wallet
+                const wallet = new WasmWallet("testpassword");
+                
+                // Get the public key
+                const publicKey = wallet.get_public_key();
+                
+                // Sign a message
+                const signature = wallet.sign_message("Hello, World!");
+                
+                // Display results
+                document.getElementById('output').innerHTML = `
+                    <p>WASM loaded successfully!</p>
+                    <p>Public Key: ${publicKey}</p>
+                    <p>Signature: ${signature}</p>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('output').innerHTML = `<p>Error: ${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

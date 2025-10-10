@@ -103,19 +103,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const walletSetupContainer = document.getElementById('walletSetupContainer');
     const closeModal = document.querySelector('.close');
     
+    // Import the WASM wallet module
+    import('./wallet.js').then(walletModule => {
+        window.wallet = walletModule.default;
+    }).catch(error => {
+        console.error('Failed to load wallet module:', error);
+    });
+    
     // Check if wallet exists on page load
-    window.addEventListener('load', function() {
+    window.addEventListener('load', async function() {
         if (hasWallet()) {
             // If wallet exists, update UI to show connected state
             const walletData = getWalletData();
-            if (walletData && walletData.address) {
-                updateWalletUI(walletData.address, '1,250.50 ASC');
+            if (walletData && walletData.publicKey) {
+                updateWalletUI(walletData.publicKey, '1,250.50 ASC');
             }
         }
     });
     
     if (connectWalletBtn) {
-        connectWalletBtn.addEventListener('click', function() {
+        connectWalletBtn.addEventListener('click', async function() {
             // Add visual feedback
             this.style.animation = 'button-click 0.3s';
             
@@ -183,8 +190,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    function updateWalletUI(address, balance) {
-        walletAddress.textContent = address;
+    function updateWalletUI(publicKey, balance) {
+        // Display shortened public key
+        const shortKey = publicKey.length > 20 ? 
+            publicKey.substring(0, 6) + '...' + publicKey.substring(publicKey.length - 4) : 
+            publicKey;
+        walletAddress.textContent = shortKey;
         tokenBalance.textContent = balance;
         connectWalletBtn.textContent = 'Connected';
         connectWalletBtn.disabled = true;
@@ -202,9 +213,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Remove wallet data from localStorage
         localStorage.removeItem('cnetai_wallet');
+        
+        // Lock the WASM wallet if it exists
+        if (window.wallet) {
+            window.wallet.lockWallet();
+        }
     }
     
-    function showUnlockWalletForm() {
+    async function showUnlockWalletForm() {
         walletSetupContainer.innerHTML = `
             <h2>Unlock Your Wallet</h2>
             <div class="wallet-setup-form">
@@ -224,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
             walletModal.style.display = 'none';
         });
         
-        document.getElementById('unlockWalletBtn').addEventListener('click', function() {
+        document.getElementById('unlockWalletBtn').addEventListener('click', async function() {
             const password = document.getElementById('unlockPassword').value;
             
             if (!password) {
@@ -232,17 +248,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // In a real implementation, you would decrypt the wallet data here
-            // For now, we'll just simulate successful unlock
-            const walletData = getWalletData();
-            if (walletData) {
-                updateWalletUI(walletData.address, '1,250.50 ASC');
-                walletModal.style.display = 'none';
+            try {
+                // Import the existing wallet
+                const walletDataJson = localStorage.getItem('cnetai_wallet');
+                if (!walletDataJson) {
+                    alert('No wallet found');
+                    return;
+                }
                 
-                // Redirect to dashboard (to be implemented)
-                // window.location.href = '/dashboard';
-            } else {
-                alert('Failed to unlock wallet');
+                const success = await window.wallet.importWallet(walletDataJson, password);
+                if (success) {
+                    const publicKey = window.wallet.getPublicKey();
+                    updateWalletUI(publicKey, '1,250.50 ASC');
+                    walletModal.style.display = 'none';
+                    
+                    // Redirect to dashboard (to be implemented)
+                    // window.location.href = '/dashboard';
+                } else {
+                    alert('Failed to unlock wallet. Incorrect password.');
+                }
+            } catch (error) {
+                console.error('Error unlocking wallet:', error);
+                alert('Failed to unlock wallet: ' + error.message);
             }
         });
     }
@@ -385,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('step2').classList.add('active');
         });
         
-        document.getElementById('createWalletBtn').addEventListener('click', function() {
+        document.getElementById('createWalletBtn').addEventListener('click', async function() {
             const password = document.getElementById('walletPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             
@@ -405,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Create wallet
-            createWallet(password);
+            await createWallet(password);
         });
     }
     
@@ -428,29 +455,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    function createWallet(password) {
-        // In a real implementation, you would generate actual key pairs
-        // For now, we'll create mock wallet data
-        const walletData = {
-            address: '0x' + Array.from({length: 40}, () => Math.floor(Math.random() * 16).toString(16)).join(''),
-            accountName: document.getElementById('accountName').value,
-            createdAt: new Date().toISOString(),
-            // In a real implementation, you would encrypt the private key with the password
-            encryptedPrivateKey: 'encrypted_private_key_placeholder'
-        };
-        
-        // Save wallet data
-        if (saveWalletData(walletData)) {
-            updateWalletUI(walletData.address, '1,250.50 ASC');
-            walletModal.style.display = 'none';
+    async function createWallet(password) {
+        try {
+            // Create a new wallet using the WASM library
+            const walletResult = await window.wallet.createWallet(password);
+            const publicKey = walletResult.publicKey;
+            const walletDataJson = walletResult.walletData;
             
-            // Show success message
-            alert('Wallet created successfully!');
+            // Save wallet data
+            const walletData = {
+                publicKey: publicKey,
+                accountName: document.getElementById('accountName').value,
+                createdAt: new Date().toISOString(),
+                walletData: walletDataJson
+            };
             
-            // Redirect to dashboard (to be implemented)
-            // window.location.href = '/dashboard';
-        } else {
-            alert('Failed to create wallet');
+            if (saveWalletData(walletData)) {
+                updateWalletUI(publicKey, '1,250.50 ASC');
+                walletModal.style.display = 'none';
+                
+                // Show success message
+                alert('Wallet created successfully!');
+                
+                // Redirect to dashboard (to be implemented)
+                // window.location.href = '/dashboard';
+            } else {
+                alert('Failed to save wallet data');
+            }
+        } catch (error) {
+            console.error('Error creating wallet:', error);
+            alert('Failed to create wallet: ' + error.message);
         }
     }
 

@@ -1,23 +1,19 @@
 {
-  "name": "cnetai-website",
-  "version": "1.0.0",
-  "description": "CNetAI - Quantum-Resistant Blockchain Platform Website",
-  "main": "index.html",
-  "scripts": {
-    "start": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "keywords": [
-    "blockchain",
-    "ai",
-    "cybersecurity",
-    "decentralized",
-    "pwa"
+  "name": "cnetai-wasm-signer",
+  "type": "module",
+  "collaborators": [
+    "Wārudo Surī <dev@cnetai.com>"
   ],
-  "author": "CNetAI Team",
-  "license": "MIT",
-  "devDependencies": {
-    "vite": "^4.0.0"
-  }
+  "description": "WASM-based signing library for the CNetAI PWA.",
+  "version": "0.1.0",
+  "files": [
+    "cnetai_wasm_signer_bg.wasm",
+    "cnetai_wasm_signer.js",
+    "cnetai_wasm_signer.d.ts"
+  ],
+  "main": "cnetai_wasm_signer.js",
+  "types": "cnetai_wasm_signer.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
 }
