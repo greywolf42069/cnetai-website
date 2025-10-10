@@ -320,6 +320,59 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    function showRestoreWalletForm() {
+        walletSetupContainer.innerHTML = `
+            <h2>Restore Wallet</h2>
+            <div class="wallet-setup-step active" id="step1">
+                <div class="wallet-setup-form">
+                    <div class="form-group">
+                        <label for="accountName">Account Name</label>
+                        <input type="text" id="accountName" placeholder="Enter account name">
+                    </div>
+                    <div class="actions">
+                        <button class="btn secondary-btn" id="cancelSetupBtn">Cancel</button>
+                        <button class="btn primary-btn" id="nextStepBtn">Next</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wallet-setup-step" id="step2">
+                <div class="wallet-setup-form">
+                    <div id="seedWordsSection">
+                        <div class="form-group">
+                            <label>Enter Your Seed Words</label>
+                            <textarea id="seedWords" placeholder="Enter your 12 or 24 seed words, separated by spaces"></textarea>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn secondary-btn" id="backStepBtn">Back</button>
+                        <button class="btn primary-btn" id="nextStep2Btn">Next</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wallet-setup-step" id="step3">
+                <div class="wallet-setup-form">
+                    <div class="form-group">
+                        <label for="walletPassword">Password</label>
+                        <input type="password" id="walletPassword" placeholder="Set a strong password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                    </div>
+                    <div class="actions">
+                        <button class="btn secondary-btn" id="backStep2Btn">Back</button>
+                        <button class="btn primary-btn" id="createWalletBtn">Restore Wallet</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add event listeners for restore wallet form
+        setupRestoreWalletFormListeners();
+    }
+    
     function showWalletSetupForm() {
         walletSetupContainer.innerHTML = `
             <h2>Create New Wallet</h2>
@@ -342,13 +395,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <div class="wallet-setup-step" id="step2">
                 <div class="wallet-setup-form">
-                    <div id="seedWordsSection">
+                    <div id="seedWordsSection" style="display: none;">
                         <div class="form-group">
                             <label>Enter Your Seed Words</label>
                             <textarea id="seedWords" placeholder="Enter your 12 or 24 seed words, separated by spaces"></textarea>
                         </div>
                     </div>
-                    <div id="generateKeysSection" style="display: none;">
+                    <div id="generateKeysSection">
                         <div class="form-group">
                             <label>Your New Seed Words</label>
                             <div class="seed-words" id="generatedSeedWords">
@@ -401,9 +454,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 seedWordsSection.style.display = 'none';
                 generateKeysSection.style.display = 'block';
-                
-                // Generate seed words
-                generateSeedWords();
             }
         });
         
@@ -417,9 +467,13 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('step1').classList.remove('active');
             document.getElementById('step2').classList.add('active');
             
-            // If not importing seed words, generate them
+            // Check if importing seed words
             const importSeed = document.getElementById('importSeedCheckbox').checked;
-            if (!importSeed) {
+            if (importSeed) {
+                document.getElementById('seedWordsSection').style.display = 'block';
+                document.getElementById('generateKeysSection').style.display = 'none';
+            } else {
+                // Generate seed words for new wallet creation
                 document.getElementById('generateKeysSection').style.display = 'block';
                 generateSeedWords();
             }
@@ -432,7 +486,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         document.getElementById('nextStep2Btn').addEventListener('click', function() {
-            const importSeed = document.getElementById('importSeedCheckbox').checked;
+            const importSeed = document.getElementById('importSeedCheckbox') ? document.getElementById('importSeedCheckbox').checked : false;
             
             if (importSeed) {
                 const seedWords = document.getElementById('seedWords').value.trim();
@@ -477,23 +531,105 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
+            // Check if we're restoring a wallet
+            const importSeed = document.getElementById('importSeedCheckbox') ? document.getElementById('importSeedCheckbox').checked : false;
+            const buttonText = this.textContent;
+            
+            // Update button text based on flow
+            if (importSeed) {
+                this.textContent = 'Restore Wallet';
+            } else {
+                this.textContent = 'Create Wallet';
+            }
+            
             // Create wallet
             await createWallet(password);
         });
     }
     
+    function setupRestoreWalletFormListeners() {
+        // Add event listeners for step 1
+        document.getElementById('cancelSetupBtn').addEventListener('click', function() {
+            walletModal.style.display = 'none';
+        });
+        
+        document.getElementById('nextStepBtn').addEventListener('click', function() {
+            const accountName = document.getElementById('accountName').value;
+            if (!accountName) {
+                alert('Please enter an account name');
+                return;
+            }
+            
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+        });
+        
+        // Add event listeners for step 2
+        document.getElementById('backStepBtn').addEventListener('click', function() {
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step1').classList.add('active');
+        });
+        
+        document.getElementById('nextStep2Btn').addEventListener('click', function() {
+            const seedWords = document.getElementById('seedWords').value.trim();
+            if (!seedWords) {
+                alert('Please enter your seed words');
+                return;
+            }
+            
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.add('active');
+        });
+        
+        // Add event listeners for step 3
+        document.getElementById('backStep2Btn').addEventListener('click', function() {
+            document.getElementById('step3').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+        });
+        
+        document.getElementById('createWalletBtn').addEventListener('click', async function() {
+            const password = document.getElementById('walletPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!password || !confirmPassword) {
+                alert('Please enter and confirm your password');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long');
+                return;
+            }
+            
+            // Update button text for restore flow
+            this.textContent = 'Restore Wallet';
+            
+            // Restore wallet (in a real implementation, you would use the seed words)
+            await createWallet(password);
+        });
+    }
+    
     function generateSeedWords() {
-        // In a real implementation, you would generate actual seed words
-        // For now, we'll use placeholder words
-        const words = [
+        // Generate more random seed words
+        const wordList = [
             'circuit', 'digital', 'neon', 'pulse', 'quantum', 'matrix',
-            'cyber', 'grid', 'node', 'packet', 'signal', 'voltage'
+            'cyber', 'grid', 'node', 'packet', 'signal', 'voltage',
+            'firewall', 'protocol', 'server', 'client', 'router', 'switch',
+            'algorithm', 'binary', 'cache', 'daemon', 'entropy', 'firmware'
         ];
+        
+        // Shuffle the words and take first 12
+        const shuffledWords = [...wordList].sort(() => 0.5 - Math.random()).slice(0, 12);
         
         const seedWordsContainer = document.getElementById('generatedSeedWords');
         seedWordsContainer.innerHTML = '';
         
-        words.forEach((word, index) => {
+        shuffledWords.forEach((word, index) => {
             const wordElement = document.createElement('div');
             wordElement.className = 'seed-word';
             wordElement.textContent = `${index + 1}. ${word}`;
