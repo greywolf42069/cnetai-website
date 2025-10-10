@@ -15,10 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const nav = document.querySelector('.nav');
     
-    mobileMenuToggle.addEventListener('click', function() {
-        nav.classList.toggle('active');
-        mobileMenuToggle.classList.toggle('active');
-    });
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+    }
 
     // Add functionality to open mobile menu when clicking the logo
     const logo = document.querySelector('.logo');
