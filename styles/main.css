@@ -2354,40 +2354,104 @@ h1, h2, h3, h4, h5, h6 {
     padding: 80px 0;
     background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
     min-height: calc(100vh - 160px);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(0, 204, 255, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255, 102, 0, 0.1) 0%, transparent 20%);
+    z-index: -1;
 }
 
 .dashboard-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    gap: 25px;
     margin-top: 30px;
 }
 
 .wallet-info-card,
 .activity-card,
-.mining-card {
-    background: rgba(10, 20, 40, 0.7);
-    border: 1px solid var(--accent-cyan);
-    border-radius: 10px;
+.stats-card {
+    background: linear-gradient(145deg, rgba(10, 20, 40, 0.8), rgba(5, 10, 20, 0.9));
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    border-radius: 15px;
     padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
-    transition: var(--transition-normal);
+    box-shadow: 
+        0 10px 30px rgba(0, 102, 204, 0.2),
+        inset 0 0 20px rgba(0, 204, 255, 0.1);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.wallet-info-card::before,
+.activity-card::before,
+.stats-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--accent-cyan), var(--accent-blue), var(--accent-orange));
+    z-index: -1;
+    border-radius: 17px;
+    animation: border-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes border-glow {
+    0% {
+        opacity: 0.3;
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 0.7;
+        filter: blur(8px);
+    }
 }
 
 .wallet-info-card:hover,
 .activity-card:hover,
-.mining-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 204, 255, 0.4);
+.stats-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 15px 40px rgba(0, 204, 255, 0.4),
+        inset 0 0 30px rgba(0, 204, 255, 0.2);
 }
 
 .wallet-info-card h2,
 .activity-card h2,
-.mining-card h2 {
+.stats-card h2 {
     color: var(--accent-cyan);
     font-family: 'Orbitron', sans-serif;
     margin-bottom: 20px;
     font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+}
+
+.wallet-info-card h2::after,
+.activity-card h2::after,
+.stats-card h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--accent-orange);
 }
 
 .wallet-details {
@@ -2397,8 +2461,15 @@ h1, h2, h3, h4, h5, h6 {
 .detail-item {
     display: flex;
     justify-content: space-between;
-    padding: 12px 0;
+    padding: 15px 0;
     border-bottom: 1px solid rgba(0, 204, 255, 0.1);
+    transition: background 0.3s ease;
+}
+
+.detail-item:hover {
+    background: rgba(0, 102, 204, 0.1);
+    border-radius: 5px;
+    padding: 15px;
 }
 
 .detail-item:last-child {
@@ -2408,6 +2479,7 @@ h1, h2, h3, h4, h5, h6 {
 .detail-item .label {
     color: var(--gray-text);
     font-family: 'Exo 2', sans-serif;
+    font-weight: 500;
 }
 
 .detail-item .value {
@@ -2416,20 +2488,42 @@ h1, h2, h3, h4, h5, h6 {
     word-break: break-all;
     text-align: right;
     max-width: 60%;
+    font-size: 0.95rem;
 }
 
 .wallet-actions {
     display: flex;
     gap: 15px;
+    margin-top: 20px;
 }
 
 .wallet-actions .btn {
     flex: 1;
+    padding: 12px 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .activity-list {
     max-height: 300px;
     overflow-y: auto;
+    padding-right: 10px;
+}
+
+.activity-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.activity-list::-webkit-scrollbar-track {
+    background: rgba(0, 102, 204, 0.1);
+    border-radius: 3px;
+}
+
+.activity-list::-webkit-scrollbar-thumb {
+    background: var(--accent-cyan);
+    border-radius: 3px;
 }
 
 .activity-item {
@@ -2437,15 +2531,35 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     padding: 15px 0;
     border-bottom: 1px solid rgba(0, 204, 255, 0.1);
+    animation: fadeInUp 0.5s ease;
 }
 
 .activity-item:last-child {
     border-bottom: none;
 }
 
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .activity-icon {
     font-size: 1.5rem;
     margin-right: 15px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 204, 255, 0.1);
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
 .activity-details {
@@ -2461,51 +2575,68 @@ h1, h2, h3, h4, h5, h6 {
 
 .activity-time {
     color: var(--gray-text);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-family: 'Orbitron', sans-serif;
 }
 
-.mining-status {
+.stats-card {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    flex-direction: column;
 }
 
-.status-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--accent-red);
-    margin-right: 10px;
-}
-
-.status-indicator.active {
-    background: var(--accent-green);
-    box-shadow: 0 0 10px var(--accent-green);
-}
-
-.mining-stats {
-    margin-bottom: 25px;
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    flex: 1;
 }
 
 .stat-item {
     display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: rgba(0, 51, 102, 0.2);
+    border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
-.stat-item .label {
-    color: var(--gray-text);
-    font-family: 'Exo 2', sans-serif;
+.stat-item:hover {
+    background: rgba(0, 102, 204, 0.3);
+    transform: translateY(-3px);
 }
 
-.stat-item .value {
-    color: var(--accent-cyan);
+.stat-value {
     font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+}
+
+.stat-label {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.85rem;
+    color: var(--gray-text);
+    text-align: center;
 }
 
 @media (max-width: 768px) {
+    .dashboard {
+        padding: 60px 0;
+    }
+    
     .dashboard-content {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .wallet-info-card,
+    .activity-card,
+    .stats-card {
+        padding: 20px;
     }
     
     .wallet-actions {
@@ -2514,6 +2645,82 @@ h1, h2, h3, h4, h5, h6 {
     
     .detail-item .value {
         max-width: 50%;
+        font-size: 0.9rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .stat-value {
+        font-size: 1.2rem;
+    }
+    
+    .activity-list {
+        max-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard {
+        padding: 50px 0;
+    }
+    
+    .dashboard-content {
+        gap: 15px;
+    }
+    
+    .wallet-info-card,
+    .activity-card,
+    .stats-card {
+        padding: 15px;
+    }
+    
+    .wallet-info-card h2,
+    .activity-card h2,
+    .stats-card h2 {
+        font-size: 1.3rem;
+    }
+    
+    .detail-item {
+        padding: 12px 0;
+    }
+    
+    .detail-item .label,
+    .detail-item .value {
+        font-size: 0.85rem;
+    }
+    
+    .wallet-actions .btn {
+        padding: 10px 15px;
+        font-size: 0.8rem;
+    }
+    
+    .stats-grid {
+        gap: 10px;
+    }
+    
+    .stat-value {
+        font-size: 1.1rem;
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
+    }
+    
+    .activity-icon {
+        font-size: 1.2rem;
+        width: 35px;
+        height: 35px;
+    }
+    
+    .activity-title {
+        font-size: 0.9rem;
+    }
+    
+    .activity-time {
+        font-size: 0.75rem;
     }
 }
 

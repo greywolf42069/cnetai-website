@@ -46,7 +46,7 @@
                     <div class="wallet-details">
                         <div class="detail-item">
                             <span class="label">Address:</span>
-                            <span class="value" id="walletAddress">Not connected</span>
+                            <span class="value" id="walletAddress">Loading...</span>
                         </div>
                         <div class="detail-item">
                             <span class="label">Balance:</span>
@@ -73,30 +73,36 @@
                                 <div class="activity-time">Just now</div>
                             </div>
                         </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">🪙</div>
+                            <div class="activity-details">
+                                <div class="activity-title">Wallet Created</div>
+                                <div class="activity-time">Just now</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="mining-card">
-                    <h2>Threat Mining</h2>
-                    <div class="mining-status">
-                        <div class="status-indicator active"></div>
-                        <span>Active</span>
+                <div class="stats-card">
+                    <h2>Network Stats</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">1,247</div>
+                            <div class="stat-label">Active Miners</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">89.2K</div>
+                            <div class="stat-label">Threats Blocked</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">42.7M</div>
+                            <div class="stat-label">Transactions</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">99.9%</div>
+                            <div class="stat-label">Uptime</div>
+                        </div>
                     </div>
-                    <div class="mining-stats">
-                        <div class="stat-item">
-                            <span class="label">Threats Found:</span>
-                            <span class="value">12</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="label">ASC Earned:</span>
-                            <span class="value">245.50</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="label">Battle Chips:</span>
-                            <span class="value">3</span>
-                        </div>
-                    </div>
-                    <button class="btn primary-btn" id="startMining">Start Mining</button>
                 </div>
             </div>
         </div>
@@ -144,5 +150,40 @@
     </footer>
 
     <script src="scripts/main.js"></script>
+    <script>
+        // Load wallet information when dashboard loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if wallet data exists in localStorage
+            const walletDataJson = localStorage.getItem('cnetai_wallet');
+            if (walletDataJson) {
+                try {
+                    const walletData = JSON.parse(walletDataJson);
+                    document.getElementById('walletAddress').textContent = walletData.publicKey || 'Unknown';
+                    // In a real implementation, you would fetch the actual balance
+                    // For now, we'll just show a placeholder
+                    document.getElementById('tokenBalance').textContent = '1,250.50 ASC';
+                    document.getElementById('battleChips').textContent = '5';
+                } catch (e) {
+                    console.error('Error parsing wallet data:', e);
+                    document.getElementById('walletAddress').textContent = 'Error loading wallet';
+                }
+            } else {
+                document.getElementById('walletAddress').textContent = 'No wallet connected';
+            }
+            
+            // Add disconnect functionality
+            document.getElementById('disconnectWallet').addEventListener('click', function() {
+                if (confirm('Are you sure you want to disconnect your wallet?')) {
+                    localStorage.removeItem('cnetai_wallet');
+                    window.location.href = 'index.html';
+                }
+            });
+            
+            // Add send tokens functionality
+            document.getElementById('sendTokens').addEventListener('click', function() {
+                alert('Send tokens functionality would be implemented here.');
+            });
+        });
+    </script>
 </body>
 </html>
