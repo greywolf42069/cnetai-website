@@ -2,14 +2,14 @@
 
 const CACHE_NAME = 'cnetai-v1.0.0';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/styles/main.css',
-  '/scripts/main.js',
-  '/manifest.json',
-  '/assets/icons/icon-192x192.png',
-  '/assets/icons/icon-512x512.png',
-  '/assets/icons/favicon.ico'
+  './',
+  './index.html',
+  './styles/main.css',
+  './scripts/main.js',
+  './manifest.json',
+  './assets/icons/icon-192x192.png',
+  './assets/icons/icon-512x512.png',
+  './assets/icons/favicon.ico'
 ];
 
 // Install event - cache all static assets
@@ -57,8 +57,8 @@ self.addEventListener('push', event => {
     const title = data.title || 'CNetAI Notification';
     const options = {
       body: data.body || 'You have a new notification',
-      icon: '/assets/icons/icon-192x192.png',
-      badge: '/assets/icons/icon-192x192.png'
+      icon: './assets/icons/icon-192x192.png',
+      badge: './assets/icons/icon-192x192.png'
     };
 
     event.waitUntil(
