@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     walletModal.style.display = 'none';
                     
                     // Redirect to dashboard
-                    window.location.href = '/dashboard';
+                    window.location.href = 'dashboard.html';
                 } else {
                     alert('Failed to unlock wallet. Incorrect password.');
                 }
@@ -662,7 +662,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Wallet created successfully!');
                 
                 // Redirect to dashboard
-                window.location.href = '/dashboard';
+                window.location.href = 'dashboard.html';
             } else {
                 alert('Failed to save wallet data');
             }
