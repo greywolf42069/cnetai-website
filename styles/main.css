@@ -624,6 +624,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1003;
   min-width: 44px;
   min-height: 44px;
+  position: relative; /* Ensure proper positioning */
 }
 
 .mobile-menu-toggle span {
@@ -1298,15 +1299,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .encryption-layer {
-  width: 200px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 102, 204, 0.3);
-  border: 1px solid var(--accent-cyan);
+  position: relative;
+  padding: 15px;
+  margin: 10px 0;
   border-radius: 10px;
-  color: var(--accent-cyan);
+  background: rgba(0, 51, 102, 0.2);
+  border: 1px solid rgba(0, 204, 255, 0.3);
   font-family: 'Orbitron', sans-serif;
   font-weight: 600;
   position: relative;
@@ -1314,6 +1312,27 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 15px rgba(0, 204, 255, 0.3);
   animation: layer-pulse 4s infinite;
 }
+
+.dashboard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(0, 204, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255, 102, 0, 0.05) 0%, transparent 20%);
+    z-index: -1;
+    animation: dashboard-fade 10s infinite alternate;
+}
+
+/* Ensure dashboard mobile menu toggle is visible */
+.dashboard .mobile-menu-toggle {
+    z-index: 1003;
+    position: relative;
+}
+
 
 .encryption-layer::before {
   content: '';
@@ -2765,6 +2784,13 @@ h1, h2, h3, h4, h5, h6 {
     height: 80px;
     max-height: 80px;
     overflow: hidden;
+}
+
+/* Ensure dashboard mobile menu toggle is visible */
+.dashboard .mobile-menu-toggle {
+    z-index: 1003;
+    position: relative;
+    display: flex;
 }
 
 /* Ensure dashboard logo container is properly constrained */
