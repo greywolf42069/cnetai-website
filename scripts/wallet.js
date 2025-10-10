@@ -7,8 +7,8 @@ class CNetAIWallet {
 
     async init() {
         try {
-            // Load the WASM module
-            const wasmModule = await import('../cnetai_wasm_signer.js');
+            // Load the WASM module using absolute path
+            const wasmModule = await import('/cnetai_wasm_signer.js');
             await wasmModule.default();
             this.wasm = wasmModule;
             this.isWasmLoaded = true;
@@ -29,6 +29,9 @@ class CNetAIWallet {
             return {
                 publicKey: this.wallet.get_public_key(),
                 walletData: this.wallet.to_json()
+                // In a more complete implementation, we could also return:
+                // mnemonic: this.wallet.get_mnemonic(), // If the WASM wallet supports this
+                // address: this.wallet.get_address()    // If the WASM wallet supports this
             };
         } catch (error) {
             console.error('Failed to create wallet:', error);
@@ -80,6 +83,49 @@ class CNetAIWallet {
         }
         return this.wallet.get_public_key();
     }
+
+    // Additional methods that could be implemented if the WASM supports them
+    /*
+    getMnemonic() {
+        if (!this.wallet) {
+            throw new Error('No wallet loaded');
+        }
+        // This would require the WASM wallet to expose mnemonic functionality
+        return this.wallet.get_mnemonic ? this.wallet.get_mnemonic() : null;
+    }
+
+    getAddress() {
+        if (!this.wallet) {
+            throw new Error('No wallet loaded');
+        }
+        // This would require the WASM wallet to expose address functionality
+        return this.wallet.get_address ? this.wallet.get_address() : null;
+    }
+
+    getSpendingKey() {
+        if (!this.wallet) {
+            throw new Error('No wallet loaded');
+        }
+        // This would require the WASM wallet to expose spending key functionality
+        return this.wallet.get_spending_key ? this.wallet.get_spending_key() : null;
+    }
+
+    getViewingKey() {
+        if (!this.wallet) {
+            throw new Error('No wallet loaded');
+        }
+        // This would require the WASM wallet to expose viewing key functionality
+        return this.wallet.get_viewing_key ? this.wallet.get_viewing_key() : null;
+    }
+
+    getStealthAddress() {
+        if (!this.wallet) {
+            throw new Error('No wallet loaded');
+        }
+        // This would require the WASM wallet to expose stealth address functionality
+        return this.wallet.get_stealth_address ? this.wallet.get_stealth_address() : null;
+    }
+    */
 
     async signMessage(message) {
         if (!this.wallet) {

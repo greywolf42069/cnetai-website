@@ -113,13 +113,24 @@ document.addEventListener('DOMContentLoaded', function() {
         window.wallet = null;
     });
     
-    // Check if wallet exists on page load
+    // Check if wallet exists on page load and update header button
     window.addEventListener('load', async function() {
+        // Update header button based on wallet state
+        const headerConnectWalletBtn = document.getElementById('connectWallet');
+        if (headerConnectWalletBtn) {
+            if (hasWallet()) {
+                headerConnectWalletBtn.textContent = 'Unlock Wallet';
+            } else {
+                headerConnectWalletBtn.textContent = 'Connect Wallet';
+            }
+        }
+        
+        // Also update the wallet section if it exists on this page
         if (hasWallet()) {
             // If wallet exists, update UI to show connected state
             const walletData = getWalletData();
             if (walletData && walletData.publicKey) {
-                updateWalletUI(walletData.publicKey, '1,250.50 ASC');
+                updateWalletUI(walletData.publicKey, '0 ASC'); // Show 0 ASC instead of fake value
             }
         }
     });
@@ -146,8 +157,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 showWalletSetupForm();
             }
             
-            // Show modal
-            walletModal.style.display = 'block';
+            // Show modal with safety check
+            if (walletModal) {
+                walletModal.style.display = 'block';
+            } else {
+                console.error('Wallet modal not found');
+            }
         });
     }
     
@@ -190,22 +205,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 showWalletSetupForm();
             }
             
-            // Show modal
-            walletModal.style.display = 'block';
-            console.log('[DEBUG] Wallet modal displayed');
+            // Show modal with safety check
+            if (walletModal) {
+                walletModal.style.display = 'block';
+                console.log('[DEBUG] Wallet modal displayed');
+            } else {
+                console.error('Wallet modal not found');
+            }
         });
     }
     
     // Close modal when clicking on X
     if (closeModal) {
         closeModal.addEventListener('click', function() {
-            walletModal.style.display = 'none';
+            if (walletModal) {
+                walletModal.style.display = 'none';
+            }
         });
     }
     
     // Close modal when clicking outside of it
     window.addEventListener('click', function(event) {
-        if (event.target === walletModal) {
+        if (walletModal && event.target === walletModal) {
+            walletModal.style.display = 'none';
+        }
+    });
+    
+    // Close modal with ESC key
+    window.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && walletModal && walletModal.style.display === 'block') {
             walletModal.style.display = 'none';
         }
     });
@@ -241,21 +269,41 @@ document.addEventListener('DOMContentLoaded', function() {
         const shortKey = publicKey.length > 20 ? 
             publicKey.substring(0, 6) + '...' + publicKey.substring(publicKey.length - 4) : 
             publicKey;
-        walletAddress.textContent = shortKey;
-        tokenBalance.textContent = balance;
-        connectWalletBtn.textContent = 'Connected';
-        connectWalletBtn.disabled = true;
-        connectWalletBtn.style.background = 'linear-gradient(90deg, var(--accent-green), var(--accent-cyan))';
-        connectWalletBtn.style.boxShadow = '0 0 30px rgba(0, 255, 102, 0.8)';
+        
+        // Update wallet info on the current page if elements exist
+        if (walletAddress) {
+            walletAddress.textContent = shortKey;
+        }
+        if (tokenBalance) {
+            tokenBalance.textContent = balance;
+        }
+        if (connectWalletBtn) {
+            connectWalletBtn.textContent = 'Connected';
+            connectWalletBtn.disabled = true;
+            connectWalletBtn.style.background = 'linear-gradient(90deg, var(--accent-green), var(--accent-cyan))';
+            connectWalletBtn.style.boxShadow = '0 0 30px rgba(0, 255, 102, 0.8)';
+        }
+        
+        // Also update header button
+        const headerConnectWalletBtn = document.getElementById('connectWallet');
+        if (headerConnectWalletBtn) {
+            headerConnectWalletBtn.textContent = 'Unlock Wallet';
+        }
     }
     
     function disconnectWallet() {
-        walletAddress.textContent = 'Not connected';
-        tokenBalance.textContent = '0';
-        connectWalletBtn.textContent = 'Connect Wallet';
-        connectWalletBtn.disabled = false;
-        connectWalletBtn.style.background = 'linear-gradient(90deg, var(--secondary-blue), var(--accent-cyan))';
-        connectWalletBtn.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.4)';
+        if (walletAddress) {
+            walletAddress.textContent = 'Not connected';
+        }
+        if (tokenBalance) {
+            tokenBalance.textContent = '0';
+        }
+        if (connectWalletBtn) {
+            connectWalletBtn.textContent = 'Connect Wallet';
+            connectWalletBtn.disabled = false;
+            connectWalletBtn.style.background = 'linear-gradient(90deg, var(--secondary-blue), var(--accent-cyan))';
+            connectWalletBtn.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.4)';
+        }
         
         // Remove wallet data from localStorage
         localStorage.removeItem('cnetai_wallet');
@@ -264,9 +312,36 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.wallet) {
             window.wallet.lockWallet();
         }
+        
+        // Also update header button
+        const headerConnectWalletBtn = document.getElementById('connectWallet');
+        if (headerConnectWalletBtn) {
+            headerConnectWalletBtn.textContent = 'Connect Wallet';
+        }
     }
     
     async function showUnlockWalletForm() {
+        // Safety check for walletSetupContainer
+        if (!walletSetupContainer) {
+            console.error('walletSetupContainer not found');
+            // Try to find it again in case it was added dynamically
+            const tempWalletSetupContainer = document.getElementById('walletSetupContainer');
+            if (!tempWalletSetupContainer) {
+                console.error('Still cannot find walletSetupContainer');
+                alert('Wallet setup container not found. Please refresh the page.');
+                return;
+            }
+            // Reassign if found
+            walletSetupContainer = tempWalletSetupContainer;
+        }
+        
+        // Additional safety check for wallet module
+        if (!window.wallet) {
+            console.error('Wallet module not loaded');
+            alert('Wallet functionality is not available yet. Please try again in a moment.');
+            return;
+        }
+        
         walletSetupContainer.innerHTML = `
             <h2>Unlock Your Wallet</h2>
             <div class="wallet-setup-form">
@@ -281,45 +356,87 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
         
-        // Add event listeners
-        document.getElementById('cancelUnlockBtn').addEventListener('click', function() {
-            walletModal.style.display = 'none';
-        });
+        // Add event listeners with safety checks
+        const cancelUnlockBtn = document.getElementById('cancelUnlockBtn');
+        const unlockWalletBtn = document.getElementById('unlockWalletBtn');
         
-        document.getElementById('unlockWalletBtn').addEventListener('click', async function() {
-            const password = document.getElementById('unlockPassword').value;
-            
-            if (!password) {
-                alert('Please enter your password');
-                return;
-            }
-            
-            try {
-                // Import the existing wallet
-                const walletDataJson = localStorage.getItem('cnetai_wallet');
-                if (!walletDataJson) {
-                    alert('No wallet found');
+        if (cancelUnlockBtn) {
+            cancelUnlockBtn.addEventListener('click', function() {
+                if (walletModal) {
+                    walletModal.style.display = 'none';
+                }
+            });
+        }
+        
+        if (unlockWalletBtn) {
+            unlockWalletBtn.addEventListener('click', async function() {
+                const password = document.getElementById('unlockPassword') ? document.getElementById('unlockPassword').value : '';
+                
+                if (!password) {
+                    alert('Please enter your password');
                     return;
                 }
                 
-                // Parse the wallet data and extract the WASM wallet data
-                const walletData = JSON.parse(walletDataJson);
-                const success = await window.wallet.importWallet(walletData.walletData, password);
-                if (success) {
-                    const publicKey = window.wallet.getPublicKey();
-                    updateWalletUI(publicKey, '1,250.50 ASC');
-                    walletModal.style.display = 'none';
+                try {
+                    // Import the existing wallet
+                    const walletDataJson = localStorage.getItem('cnetai_wallet');
+                    if (!walletDataJson) {
+                        alert('No wallet found');
+                        return;
+                    }
                     
-                    // Redirect to dashboard
-                    window.location.href = 'dashboard.html';
-                } else {
-                    alert('Failed to unlock wallet. Incorrect password.');
+                    // Parse the wallet data and extract the WASM wallet data
+                    const walletData = JSON.parse(walletDataJson);
+                    
+                    // Additional safety check
+                    if (!walletData.walletData) {
+                        console.error('Wallet data is missing WASM wallet data');
+                        alert('Wallet data is corrupted. Please create a new wallet.');
+                        return;
+                    }
+                    
+                    const success = await window.wallet.importWallet(walletData.walletData, password);
+                    if (success) {
+                        const publicKey = window.wallet.getPublicKey();
+                        updateWalletUI(publicKey, '0 ASC'); // Use 0 ASC instead of fake value
+                        
+                        // Close modal safely
+                        if (walletModal) {
+                            walletModal.style.display = 'none';
+                        }
+                        
+                        // Check if we're on the dashboard page
+                        if (window.location.pathname.includes('dashboard')) {
+                            // Update the dashboard UI directly
+                            const walletAddressElement = document.getElementById('walletAddress');
+                            const tokenBalanceElement = document.getElementById('tokenBalance');
+                            
+                            if (walletAddressElement) {
+                                walletAddressElement.textContent = publicKey.substring(0, 16) + '...' + publicKey.substring(publicKey.length - 8);
+                            }
+                            if (tokenBalanceElement) {
+                                tokenBalanceElement.textContent = '0 ASC';
+                            }
+                            
+                            // Update header button
+                            const headerConnectWalletBtn = document.getElementById('connectWallet');
+                            if (headerConnectWalletBtn) {
+                                headerConnectWalletBtn.textContent = 'Connected';
+                                headerConnectWalletBtn.disabled = true;
+                            }
+                        } else {
+                            // Redirect to dashboard for other pages
+                            window.location.href = 'dashboard.html';
+                        }
+                    } else {
+                        alert('Failed to unlock wallet. Incorrect password.');
+                    }
+                } catch (error) {
+                    console.error('Error unlocking wallet:', error);
+                    alert('Failed to unlock wallet: ' + error.message);
                 }
-            } catch (error) {
-                console.error('Error unlocking wallet:', error);
-                alert('Failed to unlock wallet: ' + error.message);
-            }
-        });
+            });
+        }
     }
     
     function showRestoreWalletForm() {
@@ -646,7 +763,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const publicKey = walletResult.publicKey;
             const walletDataJson = walletResult.walletData;
             
-            // Save wallet data
+            // Create wallet data object
             const walletData = {
                 publicKey: publicKey,
                 accountName: document.getElementById('accountName').value,
@@ -654,9 +771,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 walletData: walletDataJson
             };
             
+            // Add additional wallet information if available
+            // These would require updates to the WASM wallet implementation
+            /*
+            if (window.wallet.getMnemonic) {
+                walletData.mnemonic = window.wallet.getMnemonic();
+            }
+            if (window.wallet.getAddress) {
+                walletData.address = window.wallet.getAddress();
+            }
+            if (window.wallet.getSpendingKey) {
+                walletData.spendingKey = window.wallet.getSpendingKey();
+            }
+            if (window.wallet.getViewingKey) {
+                walletData.viewingKey = window.wallet.getViewingKey();
+            }
+            if (window.wallet.getStealthAddress) {
+                walletData.stealthAddress = window.wallet.getStealthAddress();
+            }
+            */
+            
+            // Save wallet data
             if (saveWalletData(walletData)) {
-                updateWalletUI(publicKey, '1,250.50 ASC');
-                walletModal.style.display = 'none';
+                updateWalletUI(publicKey, '0 ASC'); // Start with 0 balance instead of fake value
+                
+                // Close modal safely
+                if (walletModal) {
+                    walletModal.style.display = 'none';
+                }
                 
                 // Show success message
                 alert('Wallet created successfully!');
@@ -1393,13 +1535,17 @@ document.addEventListener('DOMContentLoaded', function() {
 function createChartParticles() {
     const chart = document.querySelector('.distribution-chart');
     if (!chart) {
-        console.log('Chart not found');
+        // Only log once per page load to avoid spam
+        if (!window.chartParticleLoggingDone) {
+            console.debug('Chart particles: No distribution chart found on this page');
+            window.chartParticleLoggingDone = true;
+        }
         return;
     }
     
     const particlesContainer = document.querySelector('.chart-particles');
     if (!particlesContainer) {
-        console.log('Particles container not found');
+        console.debug('Chart particles: Particles container not found');
         return;
     }
     
@@ -1451,7 +1597,18 @@ function createChartParticles() {
 
 // Continuously generate chart particles
 function startChartParticles() {
-    console.log('Starting chart particles');
+    // Check if we're on a page with a chart
+    const chart = document.querySelector('.distribution-chart');
+    if (!chart) {
+        // Only log once per page load to avoid spam
+        if (!window.chartStartLoggingDone) {
+            console.debug('Chart particles: No chart found on this page, skipping');
+            window.chartStartLoggingDone = true;
+        }
+        return;
+    }
+    
+    console.debug('Starting chart particles');
     
     // Create initial batch of particles
     for (let i = 0; i < 30; i++) {
