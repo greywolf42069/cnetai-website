@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Wallet Debug Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #000;
+            color: #00ccff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0088ff;
+        }
+        .output {
+            background: #111;
+            border: 1px solid #00aaff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            min-height: 50px;
+        }
+        .success { color: #00ff00; }
+        .error { color: #ff0000; }
+        .info { color: #00ffff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wallet Debug Test</h1>
+        
+        <button id="testWalletBtn">Test Wallet Connection</button>
+        <button id="createWalletBtn">Create Wallet</button>
+        
+        <div id="output" class="output">Click buttons above to test wallet functionality</div>
+    </div>
+
+    <script type="module">
+        document.getElementById('testWalletBtn').addEventListener('click', async function() {
+            const output = document.getElementById('output');
+            output.innerHTML = 'Testing wallet connection...';
+            
+            try {
+                // Import the wallet module
+                const walletModule = await import('./scripts/wallet.js');
+                const wallet = walletModule.default;
+                
+                output.innerHTML = '<div class="success">✓ Wallet module imported successfully!</div>';
+                output.innerHTML += '<div class="info">Wallet object: ' + typeof wallet + '</div>';
+                
+                // Check if wallet has expected methods
+                const methods = ['createWallet', 'importWallet', 'unlockWallet', 'lockWallet', 'isUnlocked', 'getPublicKey', 'signMessage'];
+                methods.forEach(method => {
+                    output.innerHTML += '<div class="' + (typeof wallet[method] === 'function' ? 'success' : 'error') + 
+                        '"> ' + (typeof wallet[method] === 'function' ? '✓' : '✗') + ' ' + method + '</div>';
+                });
+            } catch (error) {
+                output.innerHTML = '<div class="error">✗ Error importing wallet module: ' + error.message + '</div>';
+                console.error('Error:', error);
+            }
+        });
+        
+        document.getElementById('createWalletBtn').addEventListener('click', async function() {
+            const output = document.getElementById('output');
+            output.innerHTML = 'Creating wallet...';
+            
+            try {
+                // Import the wallet module
+                const walletModule = await import('./scripts/wallet.js');
+                const wallet = walletModule.default;
+                
+                // Initialize the wallet
+                await wallet.init();
+                
+                // Create a wallet
+                const result = await wallet.createWallet('testpassword');
+                output.innerHTML = '<div class="success">✓ Wallet created successfully!</div>';
+                output.innerHTML += '<div class="info">Public Key: ' + result.publicKey + '</div>';
+                output.innerHTML += '<div class="info">Wallet Data Length: ' + result.walletData.length + ' characters</div>';
+            } catch (error) {
+                output.innerHTML = '<div class="error">✗ Error creating wallet: ' + error.message + '</div>';
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
