@@ -394,3 +394,4 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(title);
     });
 });
+});
