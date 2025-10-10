@@ -161,6 +161,41 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Handle the connect wallet button in the header
+    const connectWallet = document.getElementById('connectWallet');
+    if (connectWallet) {
+        connectWallet.addEventListener('click', async function() {
+            console.log('[DEBUG] Header connect wallet button clicked');
+            
+            // Add visual feedback
+            this.style.animation = 'button-click 0.3s';
+            
+            // Check if wallet module is loaded
+            if (!window.wallet) {
+                console.warn('[WARN] Wallet module not loaded yet');
+                alert('Wallet functionality is initializing. Please try again in a moment.');
+                return;
+            }
+            
+            console.log('[INFO] Wallet module is available, proceeding with connection');
+            
+            // Check if wallet file exists
+            if (hasWallet()) {
+                console.log('[INFO] Existing wallet found, showing unlock form');
+                // Prompt to unlock existing wallet
+                showUnlockWalletForm();
+            } else {
+                console.log('[INFO] No existing wallet found, showing setup form');
+                // Start wallet creation journey
+                showWalletSetupForm();
+            }
+            
+            // Show modal
+            walletModal.style.display = 'block';
+            console.log('[DEBUG] Wallet modal displayed');
+        });
+    }
+    
     // Close modal when clicking on X
     if (closeModal) {
         closeModal.addEventListener('click', function() {
