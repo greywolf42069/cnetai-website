@@ -20,6 +20,21 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenuToggle.classList.toggle('active');
     });
 
+    // Add functionality to open mobile menu when clicking the logo
+    const logo = document.querySelector('.logo');
+    if (logo) {
+        logo.addEventListener('click', function(e) {
+            // Only toggle mobile menu on smaller screens where the toggle is visible
+            if (window.innerWidth <= 768) {
+                nav.classList.toggle('active');
+                // Also toggle the mobile menu toggle button state if it exists
+                if (mobileMenuToggle) {
+                    mobileMenuToggle.classList.toggle('active');
+                }
+            }
+        });
+    }
+
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-list a');
     navLinks.forEach(link => {
