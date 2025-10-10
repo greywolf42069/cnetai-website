@@ -1,7 +1,7 @@
 {
   "name": "CNetAI - Quantum-Resistant Blockchain Platform",
   "short_name": "CNetAI",
-  "description": "Next-generation blockchain platform with post-quantum security and AI-powered intelligence",
+  "description": "A next-generation decentralized computing layer built to clean the web using AI and post-quantum cryptography.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0e17",

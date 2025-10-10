@@ -1,16 +1,18 @@
 // Service Worker for CNetAI PWA
 
-const CACHE_NAME = 'cnetai-v1.0';
+const CACHE_NAME = 'cnetai-v1.0.0';
 const urlsToCache = [
   '/',
+  '/index.html',
   '/styles/main.css',
   '/scripts/main.js',
   '/manifest.json',
   '/assets/icons/icon-192x192.png',
-  '/assets/icons/icon-512x512.png'
+  '/assets/icons/icon-512x512.png',
+  '/assets/icons/favicon.ico'
 ];
 
-// Install event - cache assets
+// Install event - cache all static assets
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -45,5 +47,30 @@ self.addEventListener('activate', event => {
         })
       );
     })
+  );
+});
+
+// Handle push notifications (if implemented)
+self.addEventListener('push', event => {
+  if (event.data) {
+    const data = event.data.json();
+    const title = data.title || 'CNetAI Notification';
+    const options = {
+      body: data.body || 'You have a new notification',
+      icon: '/assets/icons/icon-192x192.png',
+      badge: '/assets/icons/icon-192x192.png'
+    };
+
+    event.waitUntil(
+      self.registration.showNotification(title, options)
+    );
+  }
+});
+
+// Handle notification clicks
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow('/')
   );
 });

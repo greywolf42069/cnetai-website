@@ -1,0 +1,23 @@
+{
+  "name": "cnetai-website",
+  "version": "1.0.0",
+  "description": "CNetAI - Quantum-Resistant Blockchain Platform Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "blockchain",
+    "ai",
+    "cybersecurity",
+    "decentralized",
+    "pwa"
+  ],
+  "author": "CNetAI Team",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^4.0.0"
+  }
+}

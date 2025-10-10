@@ -232,17 +232,69 @@
         </section>
 
         <!-- Tokenomics Section -->
-        <section id="tokenomics" class="tokenomics">
+        <section id="tokenomics" class="tokenomics section">
             <div class="container">
                 <h2 class="section-title">Tokenomics: Astral Shards (ASC) & Battle Chips</h2>
                 <div class="tokenomics-content">
                     <div class="token-distribution">
-                        <div class="distribution-chart">
-                            <div class="chart-segment" style="--percentage: 40; --color: #00aaff; --rotation: 0;">Ecosystem Development</div>
-                            <div class="chart-segment" style="--percentage: 25; --color: #ff6600; --rotation: 144;">Community Rewards</div>
-                            <div class="chart-segment" style="--percentage: 20; --color: #00cc66; --rotation: 234;">Team & Advisors</div>
-                            <div class="chart-segment" style="--percentage: 10; --color: #ffcc00; --rotation: 306;">Marketing</div>
-                            <div class="chart-segment" style="--percentage: 5; --color: #cc00ff; --rotation: 342;">Liquidity</div>
+                        <div class="distribution-chart-container">
+                            <div class="distribution-chart">
+                                <div class="chart-center">
+                                    <div class="center-label">
+                                        <span class="total-supply">1B</span>
+                                        <span class="center-text">Total Supply</span>
+                                    </div>
+                                </div>
+                                <div class="chart-segment" style="--percentage: 40; --color: #00aaff; --rotation: 0;" data-label="Ecosystem Development" data-value="40%">
+                                    <div class="segment-label">Ecosystem Development</div>
+                                    <div class="segment-value">40%</div>
+                                </div>
+                                <div class="chart-segment" style="--percentage: 25; --color: #ff6600; --rotation: 144;" data-label="Community Rewards" data-value="25%">
+                                    <div class="segment-label">Community Rewards</div>
+                                    <div class="segment-value">25%</div>
+                                </div>
+                                <div class="chart-segment" style="--percentage: 20; --color: #00cc66; --rotation: 234;" data-label="Team & Advisors" data-value="20%">
+                                    <div class="segment-label">Team & Advisors</div>
+                                    <div class="segment-value">20%</div>
+                                </div>
+                                <div class="chart-segment" style="--percentage: 10; --color: #ffcc00; --rotation: 306;" data-label="Marketing" data-value="10%">
+                                    <div class="segment-label">Marketing</div>
+                                    <div class="segment-value">10%</div>
+                                </div>
+                                <div class="chart-segment" style="--percentage: 5; --color: #cc00ff; --rotation: 342;" data-label="Liquidity" data-value="5%">
+                                    <div class="segment-label">Liquidity</div>
+                                    <div class="segment-value">5%</div>
+                                </div>
+                                <!-- Animated particles for enhanced visual effect -->
+                                <div class="chart-particles"></div>
+                            </div>
+                            <div class="chart-legend">
+                                <div class="legend-item" data-label="Ecosystem Development">
+                                    <div class="legend-color" style="background-color: #00aaff;"></div>
+                                    <div class="legend-text">Ecosystem Development</div>
+                                    <div class="legend-percent">40%</div>
+                                </div>
+                                <div class="legend-item" data-label="Community Rewards">
+                                    <div class="legend-color" style="background-color: #ff6600;"></div>
+                                    <div class="legend-text">Community Rewards</div>
+                                    <div class="legend-percent">25%</div>
+                                </div>
+                                <div class="legend-item" data-label="Team & Advisors">
+                                    <div class="legend-color" style="background-color: #00cc66;"></div>
+                                    <div class="legend-text">Team & Advisors</div>
+                                    <div class="legend-percent">20%</div>
+                                </div>
+                                <div class="legend-item" data-label="Marketing">
+                                    <div class="legend-color" style="background-color: #ffcc00;"></div>
+                                    <div class="legend-text">Marketing</div>
+                                    <div class="legend-percent">10%</div>
+                                </div>
+                                <div class="legend-item" data-label="Liquidity">
+                                    <div class="legend-color" style="background-color: #cc00ff;"></div>
+                                    <div class="legend-text">Liquidity</div>
+                                    <div class="legend-percent">5%</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="token-details">
@@ -429,36 +481,136 @@
                 <div class="roadmap-content">
                     <div class="roadmap-phase phase-completed">
                         <div class="phase-header">
-                            <h3>Phase 1: Foundation & Testnet</h3>
+                            <h3>Phase 1: Core Infrastructure Enhancement</h3>
                             <span class="phase-status">✅ COMPLETED</span>
                         </div>
+                        <div class="phase-subheader">
+                            <h4>Priority 1: Consensus Mechanism Stability</h4>
+                        </div>
                         <ul class="phase-details">
-                            <li>Core blockchain, post-quantum cryptography, and AI Oracle system built and tested.</li>
-                            <li>Comprehensive unit testing and third-party security audits passed.</li>
+                            <li>✅ Fix key block hash mismatch issues in Bitcoin-NG implementation</li>
+                            <li>✅ Improve microblock propagation and validation timing</li>
+                            <li>✅ Optimize block synchronization for high-node-count networks (1000+ participants)</li>
+                            <li>✅ Implement adaptive block timing based on network conditions</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Priority 2: Transaction Processing Scalability</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Enhance mempool stress testing with 2500+ varied transactions</li>
+                            <li>✅ Optimize MEV (Miner Extractable Value) prioritization algorithms</li>
+                            <li>✅ Improve transaction verification performance for confidential transactions</li>
+                            <li>✅ Implement batch processing for ring signature validations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-phase phase-completed">
+                        <div class="phase-header">
+                            <h3>Phase 2: Privacy and Security Features</h3>
+                            <span class="phase-status">✅ COMPLETED</span>
+                        </div>
+                        <div class="phase-subheader">
+                            <h4>Priority 1: Advanced Cryptographic Implementation</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Full implementation of ML-KEM (CRYSTALS-Kyber) for key encapsulation</li>
+                            <li>✅ Complete ML-DSA (CRYSTALS-Dilithium) integration for digital signatures</li>
+                            <li>✅ Enhanced Bulletproofs range proof implementation</li>
+                            <li>✅ I2P network integration for private transaction submission</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Priority 2: Confidential Transaction Enhancement</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Fix range proof verification in confidential transactions</li>
+                            <li>✅ Implement proper blinding factor management</li>
+                            <li>✅ Optimize confidential transaction size and verification speed</li>
+                            <li>✅ Add support for multiple confidential outputs per transaction</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-phase phase-completed">
+                        <div class="phase-header">
+                            <h3>Phase 3: Network Scalability and Performance</h3>
+                            <span class="phase-status">✅ COMPLETED</span>
+                        </div>
+                        <div class="phase-subheader">
+                            <h4>Priority 1: Network Topology Optimization</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Implement hierarchical network structure for 1000+ participant support</li>
+                            <li>✅ Optimize gossip protocols for reduced bandwidth usage</li>
+                            <li>✅ Add network partition detection and recovery mechanisms</li>
+                            <li>✅ Implement peer reputation scoring system</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Priority 2: Storage and Database Improvements</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Optimize UTXO set storage with Merkle trees</li>
+                            <li>✅ Implement pruning mechanisms for historical data</li>
+                            <li>✅ Add LevelDB/RocksDB integration for persistent storage</li>
+                            <li>✅ Implement snapshot and checkpoint systems</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-phase phase-completed">
+                        <div class="phase-header">
+                            <h3>Phase 4: Developer Experience and Documentation</h3>
+                            <span class="phase-status">✅ COMPLETED</span>
+                        </div>
+                        <div class="phase-subheader">
+                            <h4>Priority 1: Tooling and SDK</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Complete Rust SDK for smart contract development</li>
+                            <li>✅ Implement comprehensive API documentation</li>
+                            <li>🚧 Add developer tutorials and examples</li>
+                            <li>🚧 Create blockchain explorer integration</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Priority 2: Testing and Monitoring</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>🚧 Expand integration testing suite</li>
+                            <li>🚧 Implement performance benchmarking tools</li>
+                            <li>🚧 Add real-time monitoring dashboards</li>
+                            <li>🚧 Create chaos engineering test scenarios</li>
                         </ul>
                     </div>
                     
                     <div class="roadmap-phase phase-current">
                         <div class="phase-header">
-                            <h3>Phase 2: Mainnet Launch & Public dApp</h3>
+                            <h3>Phase 5: Advanced Features</h3>
                             <span class="phase-status">🚀 CURRENT PHASE</span>
                         </div>
-                        <ul class="phase-details">
-                            <li>Public Mainnet is live.</li>
-                            <li>The Strategic Perpetual Reverse Dutch Auction for ASC is underway.</li>
-                            <li>The CNetAI dApp is available for public download.</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="roadmap-phase phase-upcoming">
-                        <div class="phase-header">
-                            <h3>Phase 3: Network Expansion & Decentralization</h3>
-                            <span class="phase-status"> UPCOMING</span>
+                        <div class="phase-subheader">
+                            <h4>Short-term Goals (3-6 months)</h4>
                         </div>
                         <ul class="phase-details">
-                            <li>Integration of human cybersecurity experts (Oracles) to work alongside the AI validators.</li>
-                            <li>Launch of the VR Net Mapping exploration environment.</li>
-                            <li>Transition to a fully decentralized, on-chain governance model.</li>
+                            <li>Implement batch verification for cryptographic proofs</li>
+                            <li>Enhance I2P integration with better error handling</li>
+                            <li>Improve wallet user experience</li>
+                            <li>Add comprehensive test coverage</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Medium-term Goals (6-12 months)</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>Develop smart contract framework</li>
+                            <li>Implement cross-chain bridges</li>
+                            <li>Create mobile wallet applications</li>
+                            <li>Enhance governance mechanisms</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Long-term Goals (12+ months)</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>Quantum-resistant smart contracts</li>
+                            <li>Interoperability with other blockchains</li>
+                            <li>Advanced privacy features</li>
+                            <li>Institutional-grade security audits</li>
+                            <li>Global network deployment</li>
                         </ul>
                     </div>
                 </div>

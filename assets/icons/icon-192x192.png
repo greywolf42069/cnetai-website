@@ -1,1 +1,7 @@
-This is a placeholder for the 192x192 icon file.
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <rect width="192" height="192" fill="#003366"/>
+  <circle cx="96" cy="96" r="48" fill="#00ffff" opacity="0.8"/>
+  <circle cx="96" cy="96" r="24" fill="#ff6600" opacity="0.9"/>
+  <polygon points="96,48 120,72 120,120 96,144 72,120 72,72" fill="none" stroke="#00ffff" stroke-width="4"/>
+</svg>

@@ -1,1 +1,7 @@
-This is a placeholder for the 384x384 icon file.
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 384 384">
+  <rect width="384" height="384" fill="#003366"/>
+  <circle cx="192" cy="192" r="96" fill="#00ffff" opacity="0.8"/>
+  <circle cx="192" cy="192" r="48" fill="#ff6600" opacity="0.9"/>
+  <polygon points="192,96 240,144 240,240 192,288 144,240 144,144" fill="none" stroke="#00ffff" stroke-width="12"/>
+</svg>

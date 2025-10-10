@@ -1,1 +1,7 @@
-This is a placeholder for the 152x152 icon file.
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="152" height="152" viewBox="0 0 152 152">
+  <rect width="152" height="152" fill="#003366"/>
+  <circle cx="76" cy="76" r="38" fill="#00ffff" opacity="0.8"/>
+  <circle cx="76" cy="76" r="19" fill="#ff6600" opacity="0.9"/>
+  <polygon points="76,38 95,57 95,95 76,114 57,95 57,57" fill="none" stroke="#00ffff" stroke-width="5"/>
+</svg>

@@ -1,1 +1,7 @@
-This is a placeholder for the 72x72 icon file.
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72">
+  <rect width="72" height="72" fill="#003366"/>
+  <circle cx="36" cy="36" r="18" fill="#00ffff" opacity="0.8"/>
+  <circle cx="36" cy="36" r="9" fill="#ff6600" opacity="0.9"/>
+  <polygon points="36,18 45,27 45,45 36,54 27,45 27,27" fill="none" stroke="#00ffff" stroke-width="2"/>
+</svg>
