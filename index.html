@@ -1,24 +1,737 @@
-<header class="header">
-  <div class="container">
-    <div class="logo">
-      <img src="assets/logo.svg" alt="Logo" />
-      <h1>CNetAI</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#003366">
+    <title>CNetAI - Quantum-Resistant Blockchain Platform</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="icon" href="./assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./assets/logo.svg">
+</head>
+<body>
+    <div id="app">
+        <!-- Animated background grid -->
+        <div class="grid-background"></div>
+        
+        <!-- Header with navigation -->
+        <header class="header">
+            <div class="container">
+                <div class="logo">
+                    <img src="./assets/images/logo.svg" alt="CNetAI Logo" class="logo-img">
+                    <h1>CNet<span class="ai-highlight">AI</span></h1>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="#vision">Vision</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                        <li><a href="#tokenomics">Tokenomics</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                        <li><a href="#developers">Developers</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                    <button class="connect-wallet-btn" id="connectWallet">Connect Wallet</button>
+                </nav>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-title glitch-text" data-text="SECURE. INTELLIGENT. DECENTRALIZED.">SECURE. INTELLIGENT. DECENTRALIZED.</h2>
+                    <p class="hero-subtitle">The Future of the Internet is Secure, Intelligent, and Decentralized. CNetAI is a next-generation decentralized computing layer, built to clean the web. We leverage AI and post-quantum cryptography to create a safer, faster, and more private internet for everyone.</p>
+                    <div class="hero-buttons">
+                        <button class="btn primary-btn">Download the CNetAI dApp</button>
+                        <button class="btn secondary-btn">Read the Whitepaper</button>
+                    </div>
+                    <div class="token-price">
+                        <span>ASC Price:</span>
+                        <span class="price">$0.2456</span>
+                        <span class="change positive">+5.2%</span>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="network-visualization">
+                        <div class="node central-node"></div>
+                        <div class="node satellite-node" style="--delay: 0.2s;"></div>
+                        <div class="node satellite-node" style="--delay: 0.4s;"></div>
+                        <div class="node satellite-node" style="--delay: 0.6s;"></div>
+                        <div class="node satellite-node" style="--delay: 0.8s;"></div>
+                        <div class="connection-line"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision Section -->
+        <section id="vision" class="vision">
+            <div class="container">
+                <h2 class="section-title">The CNetAI Vision: "Clean the W3"</h2>
+                <div class="vision-content">
+                    <p class="section-description">The internet is plagued by malware, phishing, and malicious actors. CNetAI flips the script. Our network empowers users to become the first line of defense.</p>
+                    
+                    <div class="vision-pillars">
+                        <div class="pillar-card">
+                            <div class="pillar-icon">
+                                <div class="mining-icon"></div>
+                            </div>
+                            <h3>Decentralized Threat Hunting</h3>
+                            <p>Your personal NetAI instance "mines" new threat signatures, making the internet safer for all.</p>
+                        </div>
+                        
+                        <div class="pillar-card">
+                            <div class="pillar-icon">
+                                <div class="ai-icon"></div>
+                            </div>
+                            <h3>AI-Powered Validation</h3>
+                            <p>A network of AI Oracles achieves consensus on new threats with lightning speed and precision.</p>
+                        </div>
+                        
+                        <div class="pillar-card">
+                            <div class="pillar-icon">
+                                <div class="shield-icon"></div>
+                            </div>
+                            <h3>Quantum-Resistant Security</h3>
+                            <p>Built from the ground up with NIST-standardized post-quantum cryptography (ML-KEM & ML-DSA) to be secure against the threats of tomorrow.</p>
+                        </div>
+                        
+                        <div class="pillar-card">
+                            <div class="pillar-icon">
+                                <div class="reward-icon"></div>
+                            </div>
+                            <h3>Incentivized Participation</h3>
+                            <p>Earn Astral Shards (ASC) and collectible Battle Chip NFTs just for helping secure the network.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Core Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <div class="ai-icon"></div>
+                        </div>
+                        <h3>The NetAI dApp: Your Personal AI Assistant</h3>
+                        <p>A powerful, lightweight Progressive Web App (PWA) that acts as your gateway to the CNetAI ecosystem.</p>
+                        <ul class="feature-details">
+                            <li><strong>AI Virtual Assistant:</strong> An optimized AI (based on GPT-OSS) that runs efficiently on your devices (1-2GB RAM) to help with scheduling, correspondence, and more.</li>
+                            <li><strong>Passive Mining:</strong> Let your assistant "wander" the web during idle time to discover malicious hosts and earn rewards.</li>
+                            <li><strong>Total Privacy:</strong> Your data and activities are protected by default with advanced privacy features.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <div class="oracle-icon"></div>
+                        </div>
+                        <h3>The Oracle Network: AI-Driven Consensus</h3>
+                        <p>The intelligent core of our security system.</p>
+                        <ul class="feature-details">
+                            <li><strong>Automated Validation:</strong> New threat submissions are automatically reviewed by a committee of six specialized AI validator instances.</li>
+                            <li><strong>Unprecedented Speed:</strong> A threat is passed for action once a 4/6 consensus is reached, enabling rapid response.</li>
+                            <li><strong>Orbital Stall (Proof of Denied Service):</strong> Once a high-confidence threat is identified, the network initiates a sanctioned, network-wide DDoS to neutralize the malicious host until it can be seized by law enforcement.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <div class="privacy-icon"></div>
+                        </div>
+                        <h3>Unbreakable Privacy & Security</h3>
+                        <p>Your security and privacy are not optional features; they are the default.</p>
+                        <ul class="feature-details">
+                            <li><strong>Post-Quantum Ready:</strong> Secure against attacks from both classical and quantum computers.</li>
+                            <li><strong>Confidential Transactions:</strong> Transaction amounts are hidden using Bulletproofs zero-knowledge proofs.</li>
+                            <li><strong>Untraceable Payments:</strong> Ring signatures and stealth addresses obscure sender and receiver identities, making your financial activity truly private.</li>
+                            <li><strong>I2P Integration:</strong> An optional privacy layer allows you to submit transactions through the Invisible Internet Project (I2P) for maximum anonymity.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <div class="blockchain-icon"></div>
+                        </div>
+                        <h3>A High-Performance Blockchain Core</h3>
+                        <p>Engineered for speed, scalability, and a superior user experience.</p>
+                        <ul class="feature-details">
+                            <li><strong>Bitcoin-NG Hybrid Consensus:</strong> Combines the security of Proof-of-Stake with high throughput via key blocks and microblocks, enabling thousands of transactions per second.</li>
+                            <li><strong>User-Friendly Aliases:</strong> Register a simple, readable name (like "yourname") to use instead of long, complex wallet addresses.</li>
+                            <li><strong>Advanced Smart Contracts:</strong> Built on a high-performance Rust & BPF engine, enabling complex dApps, NFT gaming, and more.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Section -->
+        <section id="privacy" class="privacy">
+            <div class="container">
+                <h2 class="section-title">Advanced Privacy Protection</h2>
+                <div class="privacy-content">
+                    <p class="section-description">CNetAI implements multiple layers of privacy protection to ensure complete anonymity and confidentiality of transactions.</p>
+                    
+                    <div class="privacy-features">
+                        <div class="privacy-feature">
+                            <h3>Bulletproof Encryption System</h3>
+                            <div class="graphic-container">
+                                <div class="bulletproof-graphic">
+                                    <div class="encryption-layer layer-1">
+                                        <span>Transaction Data</span>
+                                    </div>
+                                    <div class="encryption-layer layer-2">
+                                        <span>Range Proof Generation</span>
+                                    </div>
+                                    <div class="encryption-layer layer-3">
+                                        <span>Zero-Knowledge Verification</span>
+                                    </div>
+                                    <div class="encryption-layer layer-4">
+                                        <span>Encrypted Output</span>
+                                    </div>
+                                    <div class="encryption-connection"></div>
+                                </div>
+                            </div>
+                            <p>Bulletproofs are short non-interactive zero-knowledge proofs that require no trusted setup. Our implementation obscures transaction amounts while ensuring validity without revealing sensitive data.</p>
+                        </div>
+                        
+                        <div class="privacy-feature">
+                            <h3>Ring Confidential Transactions (RingCT)</h3>
+                            <div class="graphic-container">
+                                <div class="ringct-graphic">
+                                    <div class="central-transaction">
+                                        <span>Actual Transaction</span>
+                                    </div>
+                                    <div class="decoy-transactions">
+                                        <div class="decoy" style="--pos: 1;"><span>Decoy #1</span></div>
+                                        <div class="decoy" style="--pos: 2;"><span>Decoy #2</span></div>
+                                        <div class="decoy" style="--pos: 3;"><span>Decoy #3</span></div>
+                                        <div class="decoy" style="--pos: 4;"><span>Decoy #4</span></div>
+                                    </div>
+                                    <div class="ring-signature">
+                                        <span>Ring Signature</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>RingCT mixes the sender's transaction with decoy participants, making it impossible to determine which party actually initiated the transaction. Dynamic ring sizes scale with network size for enhanced privacy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tokenomics Section -->
+        <section id="tokenomics" class="tokenomics section">
+            <div class="container">
+                <h2 class="section-title">Tokenomics: Astral Shards (ASC) & Battle Chips</h2>
+                <div class="tokenomics-content">
+                    <div class="token-distribution">
+                        <div class="distribution-chart-container">
+                            <div class="distribution-chart">
+                                <div class="chart-center">
+                                    <div class="center-label">
+                                        <span class="total-supply">1B</span>
+                                        <span class="center-text">Total Supply</span>
+                                    </div>
+                                </div>
+                                <div class="chart-segment" style="--percentage: 40; --color: #00aaff; --rotation: 0;" data-label="Ecosystem Development" data-value="40%">
+                                    <div class="segment-label">Ecosystem Development</div>
+                                    <div class="segment-value">40%</div>
+                                </div>
+                                <div class="chart-segment" style="--percentage: 25; --color: #ff6600; --rotation: 144;" data-label="Community Rewards" data-value="25%">
+                                    <div class="segment-label">Community Rewards</div>
+                                    <div class="segment-value">25%</div>
+                                </div>
+                                <div class="chart-segment" style="--percentage: 20; --color: #00cc66; --rotation: 234;" data-label="Team & Advisors" data-value="20%">
+                                    <div class="segment-label">Team & Advisors</div>
+                                    <div class="segment-value">20%</div>
+                                </div>
+                                <div class="chart-segment" style="--percentage: 10; --color: #ffcc00; --rotation: 306;" data-label="Marketing" data-value="10%">
+                                    <div class="segment-label">Marketing</div>
+                                    <div class="segment-value">10%</div>
+                                </div>
+                                <div class="chart-segment" style="--percentage: 5; --color: #cc00ff; --rotation: 342;" data-label="Liquidity" data-value="5%">
+                                    <div class="segment-label">Liquidity</div>
+                                    <div class="segment-value">5%</div>
+                                </div>
+                                <!-- Animated particles for enhanced visual effect -->
+                                <div class="chart-particles"></div>
+                            </div>
+                            <div class="chart-legend">
+                                <div class="legend-item" data-label="Ecosystem Development">
+                                    <div class="legend-color" style="background-color: #00aaff;"></div>
+                                    <div class="legend-text">Ecosystem Development</div>
+                                    <div class="legend-percent">40%</div>
+                                </div>
+                                <div class="legend-item" data-label="Community Rewards">
+                                    <div class="legend-color" style="background-color: #ff6600;"></div>
+                                    <div class="legend-text">Community Rewards</div>
+                                    <div class="legend-percent">25%</div>
+                                </div>
+                                <div class="legend-item" data-label="Team & Advisors">
+                                    <div class="legend-color" style="background-color: #00cc66;"></div>
+                                    <div class="legend-text">Team & Advisors</div>
+                                    <div class="legend-percent">20%</div>
+                                </div>
+                                <div class="legend-item" data-label="Marketing">
+                                    <div class="legend-color" style="background-color: #ffcc00;"></div>
+                                    <div class="legend-text">Marketing</div>
+                                    <div class="legend-percent">10%</div>
+                                </div>
+                                <div class="legend-item" data-label="Liquidity">
+                                    <div class="legend-color" style="background-color: #cc00ff;"></div>
+                                    <div class="legend-text">Liquidity</div>
+                                    <div class="legend-percent">5%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="token-details">
+                        <div class="token-stat">
+                            <span class="label">Token Name:</span>
+                            <span class="value">Astral Shards</span>
+                        </div>
+                        <div class="token-stat">
+                            <span class="label">Ticker:</span>
+                            <span class="value">ASC</span>
+                        </div>
+                        <div class="token-stat">
+                            <span class="label">Total Supply:</span>
+                            <span class="value">1,000,000,000</span>
+                        </div>
+                        <div class="token-stat">
+                            <span class="label">Consensus:</span>
+                            <span class="value">Hybrid PoS/Microblocks</span>
+                        </div>
+                        <div class="token-stat">
+                            <span class="label">Block Time:</span>
+                            <span class="value">~2 seconds</span>
+                        </div>
+                        <div class="token-stat">
+                            <span class="label">Public Sale:</span>
+                            <span class="value">50% via Reverse Dutch Auction</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="battle-chips-info">
+                    <h3>Battle Chips (NFTs)</h3>
+                    <p>Earned alongside ASC, Battle Chips are collectible, tradeable NFTs with varying rarities.</p>
+                    <ul>
+                        <li><strong>Prove Your Contribution:</strong> Show off the rare Battle Chips you've earned through network participation.</li>
+                        <li><strong>Engage in PVP Battles:</strong> Load your chips into a portfolio and battle other users for a chance to win a percentage of their ASC balance.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wallet Section -->
+        <section id="wallet" class="wallet">
+            <div class="container">
+                <h2 class="section-title">Wallet Integration</h2>
+                <div class="wallet-content">
+                    <div class="wallet-info">
+                        <div class="wallet-address">
+                            <span>Wallet Address:</span>
+                            <span id="walletAddress">Not connected</span>
+                        </div>
+                        <div class="wallet-balance">
+                            <span>$CNETAI Balance:</span>
+                            <span id="tokenBalance">0</span>
+                        </div>
+                        <div class="wallet-actions">
+                            <button class="btn primary-btn" id="connectWalletBtn">Connect Wallet</button>
+                            <button class="btn secondary-btn" id="disconnectWalletBtn">Disconnect</button>
+                        </div>
+                    </div>
+                    <div class="wallet-graphic">
+                        <div class="blockchain-connection">
+                            <div class="node wallet-node">Wallet</div>
+                            <div class="node blockchain-node">Blockchain</div>
+                            <div class="connection-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wallet Creation/Import Modal -->
+        <div id="walletModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="walletSetupContainer">
+                    <!-- Wallet setup steps will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Section -->
+        <section id="chat" class="chat">
+            <div class="container">
+                <h2 class="section-title">Community Chat</h2>
+                <div class="chat-content">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message system-message">Welcome to CNetAI Community Chat!</div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="Type your message here...">
+                        <button class="btn primary-btn" id="sendMessageBtn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Swap Section -->
+        <section id="swap" class="swap">
+            <div class="container">
+                <h2 class="section-title">Token Swap</h2>
+                <div class="swap-content">
+                    <div class="swap-form">
+                        <div class="swap-input">
+                            <label>From</label>
+                            <div class="token-input">
+                                <input type="number" id="fromAmount" placeholder="0.0">
+                                <select id="fromToken">
+                                    <option value="eth">ETH</option>
+                                    <option value="usdt">USDT</option>
+                                    <option value="cnetai" selected>$CNETAI</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="swap-arrow">
+                            <div class="arrow-icon">↓</div>
+                        </div>
+                        <div class="swap-input">
+                            <label>To</label>
+                            <div class="token-input">
+                                <input type="number" id="toAmount" placeholder="0.0" readonly>
+                                <select id="toToken">
+                                    <option value="eth" selected>ETH</option>
+                                    <option value="usdt">USDT</option>
+                                    <option value="cnetai">$CNETAI</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="swap-rate">
+                            <span>Rate: 1 $CNETAI = 0.0001 ETH</span>
+                        </div>
+                        <button class="btn primary-btn" id="swapBtn">Swap Tokens</button>
+                    </div>
+                    <div class="swap-graphic">
+                        <div class="token-flow">
+                            <div class="token from-token">$CNETAI</div>
+                            <div class="swap-arrow-graphic">⇄</div>
+                            <div class="token to-token">ETH</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Auction Section -->
+        <section id="auction" class="auction">
+            <div class="container">
+                <h2 class="section-title">Reverse Dutch Auction</h2>
+                <div class="auction-content">
+                    <div class="auction-info">
+                        <div class="auction-details">
+                            <div class="detail-item">
+                                <span>Token:</span>
+                                <span>$CNETAI</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Total Amount:</span>
+                                <span>1,000,000 $CNETAI</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Current Price:</span>
+                                <span id="currentPrice">0.0001 ETH</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Time Remaining:</span>
+                                <span id="timeRemaining">24:00:00</span>
+                            </div>
+                        </div>
+                        <div class="auction-actions">
+                            <div class="bid-input">
+                                <input type="number" id="bidAmount" placeholder="ETH amount">
+                                <button class="btn primary-btn" id="bidBtn">Place Bid</button>
+                            </div>
+                            <button class="btn secondary-btn" id="claimBtn">Claim Tokens</button>
+                        </div>
+                    </div>
+                    <div class="auction-graphic">
+                        <div class="price-chart">
+                            <div class="chart-axis">
+                                <div class="price-point start-price">0.001 ETH</div>
+                                <div class="price-point current-price">0.0001 ETH</div>
+                                <div class="price-point end-price">0.00001 ETH</div>
+                            </div>
+                            <div class="price-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap" class="roadmap">
+            <div class="container">
+                <h2 class="section-title">The Roadmap</h2>
+                <div class="roadmap-content">
+                    <div class="roadmap-phase phase-completed">
+                        <div class="phase-header">
+                            <h3>Phase 1: Core Infrastructure Enhancement</h3>
+                            <span class="phase-status">✅ COMPLETED</span>
+                        </div>
+                        <div class="phase-subheader">
+                            <h4>Priority 1: Consensus Mechanism Stability</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Fix key block hash mismatch issues in Bitcoin-NG implementation</li>
+                            <li>✅ Improve microblock propagation and validation timing</li>
+                            <li>✅ Optimize block synchronization for high-node-count networks (1000+ participants)</li>
+                            <li>✅ Implement adaptive block timing based on network conditions</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Priority 2: Transaction Processing Scalability</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Enhance mempool stress testing with 2500+ varied transactions</li>
+                            <li>✅ Optimize MEV (Miner Extractable Value) prioritization algorithms</li>
+                            <li>✅ Improve transaction verification performance for confidential transactions</li>
+                            <li>✅ Implement batch processing for ring signature validations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-phase phase-completed">
+                        <div class="phase-header">
+                            <h3>Phase 2: Privacy and Security Features</h3>
+                            <span class="phase-status">✅ COMPLETED</span>
+                        </div>
+                        <div class="phase-subheader">
+                            <h4>Priority 1: Advanced Cryptographic Implementation</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Full implementation of ML-KEM (CRYSTALS-Kyber) for key encapsulation</li>
+                            <li>✅ Complete ML-DSA (CRYSTALS-Dilithium) integration for digital signatures</li>
+                            <li>✅ Enhanced Bulletproofs range proof implementation</li>
+                            <li>✅ I2P network integration for private transaction submission</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Priority 2: Confidential Transaction Enhancement</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Fix range proof verification in confidential transactions</li>
+                            <li>✅ Implement proper blinding factor management</li>
+                            <li>✅ Optimize confidential transaction size and verification speed</li>
+                            <li>✅ Add support for multiple confidential outputs per transaction</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-phase phase-completed">
+                        <div class="phase-header">
+                            <h3>Phase 3: Network Scalability and Performance</h3>
+                            <span class="phase-status">✅ COMPLETED</span>
+                        </div>
+                        <div class="phase-subheader">
+                            <h4>Priority 1: Network Topology Optimization</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Implement hierarchical network structure for 1000+ participant support</li>
+                            <li>✅ Optimize gossip protocols for reduced bandwidth usage</li>
+                            <li>✅ Add network partition detection and recovery mechanisms</li>
+                            <li>✅ Implement peer reputation scoring system</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Priority 2: Storage and Database Improvements</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Optimize UTXO set storage with Merkle trees</li>
+                            <li>✅ Implement pruning mechanisms for historical data</li>
+                            <li>✅ Add LevelDB/RocksDB integration for persistent storage</li>
+                            <li>✅ Implement snapshot and checkpoint systems</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-phase phase-completed">
+                        <div class="phase-header">
+                            <h3>Phase 4: Developer Experience and Documentation</h3>
+                            <span class="phase-status">✅ COMPLETED</span>
+                        </div>
+                        <div class="phase-subheader">
+                            <h4>Priority 1: Tooling and SDK</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>✅ Complete Rust SDK for smart contract development</li>
+                            <li>✅ Implement comprehensive API documentation</li>
+                            <li>🚧 Add developer tutorials and examples</li>
+                            <li>🚧 Create blockchain explorer integration</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Priority 2: Testing and Monitoring</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>🚧 Expand integration testing suite</li>
+                            <li>🚧 Implement performance benchmarking tools</li>
+                            <li>🚧 Add real-time monitoring dashboards</li>
+                            <li>🚧 Create chaos engineering test scenarios</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="roadmap-phase phase-current">
+                        <div class="phase-header">
+                            <h3>Phase 5: Advanced Features</h3>
+                            <span class="phase-status">🚀 CURRENT PHASE</span>
+                        </div>
+                        <div class="phase-subheader">
+                            <h4>Short-term Goals (3-6 months)</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>Implement batch verification for cryptographic proofs</li>
+                            <li>Enhance I2P integration with better error handling</li>
+                            <li>Improve wallet user experience</li>
+                            <li>Add comprehensive test coverage</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Medium-term Goals (6-12 months)</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>Develop smart contract framework</li>
+                            <li>Implement cross-chain bridges</li>
+                            <li>Create mobile wallet applications</li>
+                            <li>Enhance governance mechanisms</li>
+                        </ul>
+                        <div class="phase-subheader">
+                            <h4>Long-term Goals (12+ months)</h4>
+                        </div>
+                        <ul class="phase-details">
+                            <li>Quantum-resistant smart contracts</li>
+                            <li>Interoperability with other blockchains</li>
+                            <li>Advanced privacy features</li>
+                            <li>Institutional-grade security audits</li>
+                            <li>Global network deployment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Developers Section -->
+        <section id="developers" class="developers">
+            <div class="container">
+                <h2 class="section-title">For Developers</h2>
+                <div class="developers-content">
+                    <p class="section-description">Build the Next Generation of Decentralized Applications. CNetAI provides a robust, secure, and scalable platform for developers. Our architecture, inspired by Solana's BPF framework and written in Rust, is built for performance.</p>
+                    
+                    <div class="developer-features">
+                        <div class="developer-feature">
+                            <h3>Powerful SDKs</h3>
+                            <p>Get started quickly with our comprehensive SDKs for Rust and JavaScript.</p>
+                        </div>
+                        
+                        <div class="developer-feature">
+                            <h3>Permanent Data Hosting</h3>
+                            <p>Host your dApp, website, or data permanently on our decentralized relay network. Pay once with ASC based on storage size.</p>
+                        </div>
+                        
+                        <div class="developer-feature">
+                            <h3>MEV-Enabled Gas System</h3>
+                            <p>Our Ethereum-like gas system allows for transaction prioritization and creates opportunities for Miner Extractable Value.</p>
+                        </div>
+                        
+                        <div class="developer-feature">
+                            <h3>Production Ready & Audited</h3>
+                            <p>Our codebase has been rigorously tested and audited, with all critical vulnerabilities resolved. Build with confidence on a secure foundation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="developer-ctas">
+                        <button class="btn primary-btn">Explore the Documentation</button>
+                        <button class="btn secondary-btn">Join our Developer Discord</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Us / The Mission</h2>
+                <div class="about-content">
+                    <h3 class="about-heading">We are Wārudo Surī.</h3>
+                    <p class="about-description">We are a team of engineers, cybersecurity experts, and visionaries dedicated to building a better internet. The digital world should not be a minefield of threats. We believe that by decentralizing security and incentivizing a global community, we can create a self-healing, resilient, and trustworthy network for generations to come. CNetAI is the first step in fulfilling that mission.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <img src="./assets/images/logo.svg" alt="CNetAI Logo" class="logo-img">
+                        <h3>CNet<span class="ai-highlight">AI</span></h3>
+                    </div>
+                    <div class="footer-links">
+                        <div class="link-column">
+                            <h4>Resources</h4>
+                            <ul>
+                                <li><a href="#">Whitepaper</a></li>
+                                <li><a href="#">Documentation</a></li>
+                                <li><a href="#">GitHub</a></li>
+                            </ul>
+                        </div>
+                        <div class="link-column">
+                            <h4>Community</h4>
+                            <ul>
+                                <li><a href="#">Discord</a></li>
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="#">Telegram</a></li>
+                            </ul>
+                        </div>
+                        <div class="link-column">
+                            <h4>Legal</h4>
+                            <ul>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms of Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 CNetAI. All rights reserved. $CNETAI</p>
+                </div>
+            </div>
+        </footer>
     </div>
-    <div class="mobile-menu-toggle" id="drawerToggle">
-      <span></span><span></span><span></span>
-    </div>
-    <nav class="nav-drawer" id="navDrawer">
-      <ul class="nav-list">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#roadmap">Roadmap</a></li>
-        <li><a href="#tokenomics">Tokenomics</a></li>
-        <li><a href="#community">Community</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-      <button id="connectWallet" class="connect-wallet-btn">Connect Wallet</button>
-    </nav>
-  </div>
-</header>
-<div class="drawer-overlay"></div>
+
+    <!-- Scripts -->
+    <script src="./scripts/main.js"></script>
+    <script>
+        // Register service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
