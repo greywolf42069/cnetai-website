@@ -11,29 +11,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Mobile menu toggle
+    // Mobile menu toggle - handle both index and dashboard pages
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const nav = document.querySelector('.nav');
     
-    if (mobileMenuToggle) {
+    if (mobileMenuToggle && nav) {
         mobileMenuToggle.addEventListener('click', function() {
+            console.log('Mobile menu toggle clicked');
             nav.classList.toggle('active');
             mobileMenuToggle.classList.toggle('active');
+            console.log('Nav active class:', nav.classList.contains('active'));
+            console.log('Mobile menu toggle active class:', mobileMenuToggle.classList.contains('active'));
         });
     }
 
     // Add functionality to open mobile menu when clicking the logo
-    const logo = document.querySelector('.logo');
-    if (logo) {
-        logo.addEventListener('click', function(e) {
-            // Only toggle mobile menu on smaller screens where the toggle is visible
-            if (window.innerWidth <= 768) {
-                nav.classList.toggle('active');
-                // Also toggle the mobile menu toggle button state if it exists
-                if (mobileMenuToggle) {
+    const logos = document.querySelectorAll('.logo');
+    if (logos.length > 0 && nav && mobileMenuToggle) {
+        logos.forEach(logo => {
+            logo.addEventListener('click', function(e) {
+                console.log('Logo clicked');
+                // Only toggle mobile menu on smaller screens where the toggle is visible
+                if (window.innerWidth <= 768) {
+                    console.log('Toggling mobile menu');
+                    nav.classList.toggle('active');
+                    // Also toggle the mobile menu toggle button state if it exists
                     mobileMenuToggle.classList.toggle('active');
+                    console.log('Nav active class:', nav.classList.contains('active'));
+                    console.log('Mobile menu toggle active class:', mobileMenuToggle.classList.contains('active'));
                 }
-            }
+            });
         });
     }
 
